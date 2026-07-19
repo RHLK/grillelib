@@ -1,0 +1,54 @@
+<div class="filter-card filter-card-w64">
+  <!-- Search Bar -->
+  <div class="relative flex items-center">
+    <span class="absolute left-2.5 text-[#888] material-icons text-base">search</span>
+    <input
+      #searchInput
+      type="text"
+      placeholder="Search items..."
+      (input)="onSearchChange(searchInput.value)"
+      class="filter-input-base filter-input-emerald pl-8 pr-3 py-1.5"
+    />
+  </div>
+
+  <!-- Quick Select Actions -->
+  <div class="flex items-center justify-between text-[11px] font-medium text-emerald-400 px-0.5 mt-1">
+    <button type="button" (click)="selectAll()" class="hover:underline cursor-pointer flex items-center gap-0.5">
+      <span class="material-icons text-xs">done_all</span> Select All
+    </button>
+    <button type="button" (click)="clearAll()" class="hover:underline cursor-pointer flex items-center gap-0.5 text-[#888] hover:text-[#BBB]">
+      <span class="material-icons text-xs">clear</span> Clear
+    </button>
+  </div>
+
+  <hr class="filter-divider" />
+
+  <!-- Checklist -->
+  <div class="max-h-48 overflow-y-auto flex flex-col gap-1.5 py-1">
+    @for (item of filteredValues(); track item) {
+      <label class="filter-item-row">
+        <input
+          type="checkbox"
+          [checked]="selectedValues().has(item)"
+          (change)="toggleValue(item)"
+          class="filter-checkbox"
+        />
+        <span class="truncate" title="{{ item }}">{{ item || '(Blank)' }}</span>
+      </label>
+    } @empty {
+      <div class="text-center text-xs text-[#888] py-3">No matches found</div>
+    }
+  </div>
+
+  <hr class="filter-divider" />
+
+  <!-- Footer Stats -->
+  <div class="flex items-center justify-between filter-small-text">
+    <span>Selected: {{ selectedValues().size }} / {{ allValues().length }}</span>
+    @if (selectedValues().size !== allValues().length) {
+      <span class="text-amber-400 font-medium">Filtered</span>
+    } @else {
+      <span>All matching</span>
+    }
+  </div>
+</div>

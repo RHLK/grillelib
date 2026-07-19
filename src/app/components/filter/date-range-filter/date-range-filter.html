@@ -1,0 +1,102 @@
+<div class="filter-card filter-card-w64">
+  <!-- Title -->
+  <div class="filter-section-title">
+    <span class="material-icons text-emerald-400 text-sm">calendar_today</span>
+    <span>Date Range Filter</span>
+  </div>
+
+  <!-- Preset Buttons Grid -->
+  <div class="grid grid-cols-2 gap-1 mt-2.5">
+    <button
+      type="button"
+      (click)="setPreset('all')"
+      class="transition-colors cursor-pointer"
+      [class.filter-btn-preset-active]="activeRange() === 'all'"
+      [class.filter-btn-preset-inactive]="activeRange() !== 'all'"
+    >
+      All Time
+    </button>
+    <button
+      type="button"
+      (click)="setPreset('today')"
+      class="transition-colors cursor-pointer"
+      [class.filter-btn-preset-active]="activeRange() === 'today'"
+      [class.filter-btn-preset-inactive]="activeRange() !== 'today'"
+    >
+      Today
+    </button>
+    <button
+      type="button"
+      (click)="setPreset('yesterday')"
+      class="transition-colors cursor-pointer"
+      [class.filter-btn-preset-active]="activeRange() === 'yesterday'"
+      [class.filter-btn-preset-inactive]="activeRange() !== 'yesterday'"
+    >
+      Yesterday
+    </button>
+    <button
+      type="button"
+      (click)="setPreset('last7')"
+      class="transition-colors cursor-pointer"
+      [class.filter-btn-preset-active]="activeRange() === 'last7'"
+      [class.filter-btn-preset-inactive]="activeRange() !== 'last7'"
+    >
+      Last 7 Days
+    </button>
+    <button
+      type="button"
+      (click)="setPreset('last30')"
+      class="transition-colors cursor-pointer"
+      [class.filter-btn-preset-active]="activeRange() === 'last30'"
+      [class.filter-btn-preset-inactive]="activeRange() !== 'last30'"
+    >
+      Last 30 Days
+    </button>
+    <button
+      type="button"
+      (click)="setPreset('thisMonth')"
+      class="transition-colors cursor-pointer"
+      [class.filter-btn-preset-active]="activeRange() === 'thisMonth'"
+      [class.filter-btn-preset-inactive]="activeRange() !== 'thisMonth'"
+    >
+      This Month
+    </button>
+  </div>
+
+  <hr class="filter-divider" />
+
+  <!-- Custom Inputs -->
+  <div class="flex flex-col gap-1.5">
+    <span class="text-[10px] text-[#888] font-bold tracking-wide uppercase">Custom Range</span>
+    
+    <div class="flex flex-col gap-1">
+      <span class="text-[10px] text-[#888] font-medium">Start Date</span>
+      <input
+        #startInput
+        type="date"
+        [value]="startDate()"
+        (change)="onCustomDateChange('start', startInput.value)"
+        class="filter-input-base filter-input-emerald px-2 py-1"
+      />
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <span class="text-[10px] text-[#888] font-medium">End Date</span>
+      <input
+        #endInput
+        type="date"
+        [value]="endDate()"
+        (change)="onCustomDateChange('end', endInput.value)"
+        class="filter-input-base filter-input-emerald px-2 py-1"
+      />
+    </div>
+  </div>
+
+  <!-- Footer Reset -->
+  <div class="flex justify-between items-center filter-small-text pt-1 mt-2">
+    <span>Active: {{ activeRangeLabel() }}</span>
+    <button type="button" (click)="resetDateFilter()" class="hover:text-emerald-400 font-medium hover:underline cursor-pointer">
+      Reset
+    </button>
+  </div>
+</div>

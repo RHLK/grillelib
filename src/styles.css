@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Base style refinements */
+body {
+  font-family: var(--font-sans);
+  background-color: #0B0C0E;
+  color: #E0E0E0;
+}
+
+/* Material Icons vertically centered with text */
+.mat-icon {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #22252A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2A2E35;
+}
+
+/* Ensure the header filter menu buttons (which we customized as emerald funnels) are permanently visible and clearly hoverable */
+.ag-header-cell-menu-button {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out !important;
+}
+
+.ag-header-cell-menu-button:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+.ag-theme-quartz-dark .ag-header-cell-menu-button,
+.ag-theme-quartz .ag-header-cell-menu-button {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+

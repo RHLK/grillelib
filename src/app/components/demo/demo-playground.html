@@ -1,0 +1,634 @@
+<div class="min-h-screen bg-[#0B0C0E] text-[#E0E0E0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
+  <!-- Top Header Bar -->
+  <header class="bg-[#0E1013] border-b border-[#22252A] px-6 py-3.5 flex items-center justify-between sticky top-0 z-50">
+    <div class="flex items-center gap-2.5">
+      <div class="bg-emerald-500 text-[#0B0C0E] p-1.5 rounded-lg shadow-sm flex items-center justify-center font-bold">
+        <span class="material-icons text-xl">grid_on</span>
+      </div>
+      <div>
+        <h1 class="font-display font-bold text-white text-base tracking-tight">GrilleLib Studio</h1>
+        <p class="text-[10px] text-[#888] font-medium">Advanced custom filters for AG Grid Community</p>
+      </div>
+    </div>
+
+    <!-- Status Utilities -->
+    <div class="flex items-center gap-4 text-xs font-medium text-[#888]">
+      <span class="flex items-center gap-1.5 px-2.5 py-1 bg-[#1A1D21] border border-[#22252A] rounded-full text-[11px] font-semibold text-[#BBB]">
+        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
+        Storybook Sandbox Active
+      </span>
+      <div class="h-4 w-px bg-[#22252A]"></div>
+      <span class="flex items-center gap-1 font-mono text-[11px] text-[#888]">
+        <span class="material-icons text-xs text-[#666]">gavel</span> GNU AGPL-3.0
+      </span>
+    </div>
+  </header>
+
+  <!-- Shell Layout Grid -->
+  <div class="flex-1 flex overflow-hidden">
+    <!-- Storybook Sidebar Explorer -->
+    <aside class="w-72 bg-[#0E1013] border-r border-[#22252A] flex flex-col justify-between sticky top-[61px] h-[calc(100vh-61px)] overflow-y-auto shrink-0 select-none">
+      <div class="p-4 flex flex-col gap-6">
+        <!-- Brand Header Info -->
+        <div class="bg-[#1A1D21] border border-[#22252A] p-3 rounded-xl flex flex-col gap-1">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#E0E0E0] tracking-wide">grillelib-angular</span>
+            <span class="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] font-bold rounded">v1.0.0</span>
+          </div>
+          <p class="text-[10px] text-[#888] leading-normal">Standalone library of enterprise-level filter elements for community spreadsheets.</p>
+        </div>
+
+        <!-- Navigation Tree list -->
+        <div class="flex flex-col gap-5">
+          <!-- Section 1 -->
+          <div class="flex flex-col gap-1.5">
+            <span class="text-[10px] font-bold text-[#555] uppercase tracking-wider px-2">Getting Started</span>
+            <div class="flex flex-col gap-0.5">
+              <button
+                type="button"
+                (click)="selectStory('overview')"
+                class="w-full text-left px-2.5 py-1.5 text-xs font-semibold rounded-lg flex items-center gap-2 transition-colors cursor-pointer"
+                [class.bg-emerald-500/10]="selectedStory() === 'overview'"
+                [class.text-emerald-400]="selectedStory() === 'overview'"
+                [class.border]="selectedStory() === 'overview'"
+                [class.border-emerald-500/20]="selectedStory() === 'overview'"
+                [class.bg-transparent]="selectedStory() !== 'overview'"
+                [class.text-[#BBB]]="selectedStory() !== 'overview'"
+                [class.hover:bg-[#1A1D21]/50]="selectedStory() !== 'overview'"
+              >
+                <span class="material-icons text-sm" [class.text-emerald-400]="selectedStory() === 'overview'">info</span>
+                Overview & Guide
+              </button>
+              <button
+                type="button"
+                (click)="selectStory('gpl-license')"
+                class="w-full text-left px-2.5 py-1.5 text-xs font-semibold rounded-lg flex items-center gap-2 transition-colors cursor-pointer"
+                [class.bg-emerald-500/10]="selectedStory() === 'gpl-license'"
+                [class.text-emerald-400]="selectedStory() === 'gpl-license'"
+                [class.border]="selectedStory() === 'gpl-license'"
+                [class.border-emerald-500/20]="selectedStory() === 'gpl-license'"
+                [class.bg-transparent]="selectedStory() !== 'gpl-license'"
+                [class.text-[#BBB]]="selectedStory() !== 'gpl-license'"
+                [class.hover:bg-[#1A1D21]/50]="selectedStory() !== 'gpl-license'"
+              >
+                <span class="material-icons text-sm" [class.text-emerald-400]="selectedStory() === 'gpl-license'">gavel</span>
+                GNU AGPL-3.0 License
+              </button>
+            </div>
+          </div>
+
+          <!-- Section 2 -->
+          <div class="flex flex-col gap-1.5">
+            <span class="text-[10px] font-bold text-[#555] uppercase tracking-wider px-2">Custom Filters</span>
+            <div class="flex flex-col gap-0.5">
+              <button
+                type="button"
+                (click)="selectStory('multi-select')"
+                class="w-full text-left px-2.5 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-between transition-colors cursor-pointer"
+                [class.bg-emerald-500/10]="selectedStory() === 'multi-select'"
+                [class.text-emerald-400]="selectedStory() === 'multi-select'"
+                [class.border]="selectedStory() === 'multi-select'"
+                [class.border-emerald-500/20]="selectedStory() === 'multi-select'"
+                [class.bg-transparent]="selectedStory() !== 'multi-select'"
+                [class.text-[#BBB]]="selectedStory() !== 'multi-select'"
+                [class.hover:bg-[#1A1D21]/50]="selectedStory() !== 'multi-select'"
+              >
+                <span class="flex items-center gap-2">
+                  <span class="material-icons text-sm" [class.text-emerald-400]="selectedStory() === 'multi-select'">check_box</span>
+                  Multi-Select Filter
+                </span>
+                <span class="text-[9px] bg-[#1A1D21] border border-[#22252A] px-1 py-0.2 rounded font-medium text-[#888]">List</span>
+              </button>
+
+              <button
+                type="button"
+                (click)="selectStory('regex')"
+                class="w-full text-left px-2.5 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-between transition-colors cursor-pointer"
+                [class.bg-emerald-500/10]="selectedStory() === 'regex'"
+                [class.text-emerald-400]="selectedStory() === 'regex'"
+                [class.border]="selectedStory() === 'regex'"
+                [class.border-emerald-500/20]="selectedStory() === 'regex'"
+                [class.bg-transparent]="selectedStory() !== 'regex'"
+                [class.text-[#BBB]]="selectedStory() !== 'regex'"
+                [class.hover:bg-[#1A1D21]/50]="selectedStory() !== 'regex'"
+              >
+                <span class="flex items-center gap-2">
+                  <span class="material-icons text-sm" [class.text-emerald-400]="selectedStory() === 'regex'">code</span>
+                  Regex Match Filter
+                </span>
+                <span class="text-[9px] bg-[#1A1D21] border border-[#22252A] px-1 py-0.2 rounded font-medium text-[#888]">Exp</span>
+              </button>
+
+              <button
+                type="button"
+                (click)="selectStory('date-range')"
+                class="w-full text-left px-2.5 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-between transition-colors cursor-pointer"
+                [class.bg-emerald-500/10]="selectedStory() === 'date-range'"
+                [class.text-emerald-400]="selectedStory() === 'date-range'"
+                [class.border]="selectedStory() === 'date-range'"
+                [class.border-emerald-500/20]="selectedStory() === 'date-range'"
+                [class.bg-transparent]="selectedStory() !== 'date-range'"
+                [class.text-[#BBB]]="selectedStory() !== 'date-range'"
+                [class.hover:bg-[#1A1D21]/50]="selectedStory() !== 'date-range'"
+              >
+                <span class="flex items-center gap-2">
+                  <span class="material-icons text-sm" [class.text-emerald-400]="selectedStory() === 'date-range'">date_range</span>
+                  Advanced Date Range
+                </span>
+                <span class="text-[9px] bg-[#1A1D21] border border-[#22252A] px-1 py-0.2 rounded font-medium text-[#888]">Date</span>
+              </button>
+
+              <button
+                type="button"
+                (click)="selectStory('smart-ai')"
+                class="w-full text-left px-2.5 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-between transition-colors cursor-pointer"
+                [class.bg-violet-500/10]="selectedStory() === 'smart-ai'"
+                [class.text-violet-400]="selectedStory() === 'smart-ai'"
+                [class.border]="selectedStory() === 'smart-ai'"
+                [class.border-violet-500/20]="selectedStory() === 'smart-ai'"
+                [class.bg-transparent]="selectedStory() !== 'smart-ai'"
+                [class.text-[#BBB]]="selectedStory() !== 'smart-ai'"
+                [class.hover:bg-[#1A1D21]/50]="selectedStory() !== 'smart-ai'"
+              >
+                <span class="flex items-center gap-2 font-semibold">
+                  <span class="material-icons text-sm animate-pulse" [class.text-violet-400]="selectedStory() === 'smart-ai'">psychology</span>
+                  Gemini Smart AI Filter
+                </span>
+                <span class="text-[9px] bg-violet-500/10 border border-violet-500/20 px-1 py-0.2 rounded font-bold text-violet-400">AI</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Repo Footer Card -->
+      <div class="p-4 border-t border-[#22252A] bg-[#0E1013]">
+        <div class="flex flex-col gap-2 p-3 bg-[#14161B] border border-[#22252A] rounded-xl shadow-2xl">
+          <div class="flex items-center gap-1.5">
+            <span class="material-icons text-emerald-400 text-sm">link</span>
+            <span class="text-[11px] font-bold text-[#E0E0E0] tracking-tight">GitHub Project Repo</span>
+          </div>
+          <p class="text-[10px] text-[#888] leading-normal font-mono truncate">
+            https://github.com/RHLK/grillelib.git
+          </p>
+          <a
+            href="https://github.com/RHLK/grillelib.git"
+            target="_blank"
+            class="text-[10px] font-bold text-emerald-400 hover:text-emerald-300 hover:underline flex items-center gap-0.5 mt-1 cursor-pointer"
+          >
+            Open Repository <span class="material-icons text-xs">launch</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Sandbox Container -->
+    <main class="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col gap-8 max-w-7xl mx-auto w-full">
+      
+      <!-- STORY 1: OVERVIEW & GENERAL GUIDE -->
+      @if (selectedStory() === 'overview') {
+        <section class="flex flex-col gap-6 max-w-4xl">
+          <div class="flex flex-col gap-2">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Welcome to GrilleLib Studio</span>
+            <h2 class="font-display font-bold text-3xl text-white tracking-tight">Seamless AG Grid Community Custom Filtering</h2>
+            <p class="text-[#888] leading-relaxed text-sm">
+              GrilleLib provides premium open-source custom filters that bridge the functional gaps between AG Grid Community and Enterprise. It allows corporate and indie-hacker consumers to integrate enterprise-grade set filters, regex validators, advanced calendars, and even Gemini-powered AI column filters into their own front-end projects, completely for free under the <strong>GNU AGPL-3.0 Copyleft License</strong>.
+            </p>
+          </div>
+
+          <!-- Quick Feature Comparison Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+            <div class="bg-[#14161B] border border-[#22252A] p-4 rounded-xl flex flex-col gap-2 shadow-2xl">
+              <span class="material-icons text-emerald-400 text-xl">verified_user</span>
+              <span class="font-bold text-[#E0E0E0] text-xs">Replicate Set Filtering</span>
+              <p class="text-[11px] text-[#888] leading-normal">
+                Avoid paying $1,200/year for enterprise licences. Get searchable, sorting multi-checkbox filters seamlessly on AG Grid Community.
+              </p>
+            </div>
+            <div class="bg-[#14161B] border border-[#22252A] p-4 rounded-xl flex flex-col gap-2 shadow-2xl">
+              <span class="material-icons text-violet-400 text-xl">psychology</span>
+              <span class="font-bold text-[#E0E0E0] text-xs">AI Semantic Queries</span>
+              <p class="text-[11px] text-[#888] leading-normal">
+                Let your business users filter records using conversational sentences like "employees earning over 70k in the sales group".
+              </p>
+            </div>
+            <div class="bg-[#14161B] border border-[#22252A] p-4 rounded-xl flex flex-col gap-2 shadow-2xl">
+              <span class="material-icons text-sky-400 text-xl">gavel</span>
+              <span class="font-bold text-[#E0E0E0] text-xs">100% Copyleft Guarantee</span>
+              <p class="text-[11px] text-[#888] leading-normal">
+                No vendor lock-ins. Free, open-source codebase licensed under GNU Copyleft to ensure code contributions remain public.
+              </p>
+            </div>
+          </div>
+
+          <!-- Installation Walkthrough -->
+          <div class="bg-[#14161B] border border-[#22252A] rounded-xl overflow-hidden mt-2">
+            <div class="bg-[#1A1D21] px-4 py-3 border-b border-[#22252A] flex items-center justify-between">
+              <span class="text-xs font-bold text-[#E0E0E0]">Quick Installation Guide</span>
+              <span class="font-mono text-[10px] text-[#888]">bash / terminal</span>
+            </div>
+            <div class="p-4 font-mono text-xs text-slate-300 bg-[#0B0C0E] flex flex-col gap-2 leading-relaxed">
+              <div><span class="text-emerald-400"># 1. Install required community packages</span></div>
+              <div>npm install ag-grid-community ag-grid-angular --save</div>
+              <div><span class="text-emerald-400"># 2. Add the grillelib library to your frontend project repo</span></div>
+              <div>npm install &#64;rhlk/grillelib --save</div>
+              <div><span class="text-emerald-400"># 3. Setup styling sheet imports inside your styles.css</span></div>
+              <div>&#64;import "ag-grid-community/styles/ag-grid.css";</div>
+              <div>&#64;import "ag-grid-community/styles/ag-theme-quartz.css";</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              (click)="selectStory('multi-select')"
+              class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-[#0B0C0E] rounded-lg text-xs font-bold shadow-sm transition-colors cursor-pointer flex items-center gap-1"
+            >
+              Start Exploring Components <span class="material-icons text-sm">arrow_forward</span>
+            </button>
+          </div>
+        </section>
+      }
+
+      <!-- STORY 2: LICENSE DETAILS -->
+      @if (selectedStory() === 'gpl-license') {
+        <section class="flex flex-col gap-6 max-w-4xl">
+          <div class="flex flex-col gap-2">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Legal Framework</span>
+            <h2 class="font-display font-bold text-3xl text-white tracking-tight">GNU AGPL-3.0 Copyleft (Licensing Statement)</h2>
+            <p class="text-[#888] leading-relaxed text-sm">
+              GrilleLib is proudly licensed as free software under the <strong>GNU Affero General Public License (AGPL-3.0)</strong>. This means we believe developers deserve complete architectural independence and safety from proprietary vendor constraints.
+            </p>
+          </div>
+
+          <!-- GPL Highlights Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+            <div class="bg-[#14161B] border border-[#22252A] p-4 rounded-xl flex flex-col gap-3 shadow-2xl">
+              <div class="flex items-center gap-2 text-emerald-400 font-semibold text-xs">
+                <span class="material-icons text-base">verified</span>
+                <span>The Copyleft Standard</span>
+              </div>
+              <p class="text-xs text-[#888] leading-relaxed">
+                Copyleft guarantees that any modifications, derivative work, or packages built upon GrilleLib must also be released as fully transparent open-source code under the exact same AGPL-3.0 terms. It ensures corporate users can never privatize our community efforts.
+              </p>
+            </div>
+            <div class="bg-[#14161B] border border-[#22252A] p-4 rounded-xl flex flex-col gap-3 shadow-2xl">
+              <div class="flex items-center gap-2 text-emerald-400 font-semibold text-xs">
+                <span class="material-icons text-base">gavel</span>
+                <span>Freedom to Redistribution</span>
+              </div>
+              <p class="text-xs text-[#888] leading-relaxed">
+                You are permitted to host, distribute, bundle, and share GrilleLib components with your coworkers, students, clients, or open-source community groups without any arbitrary cost, usage caps, or tracking analytics.
+              </p>
+            </div>
+          </div>
+
+          <!-- Legal Badge representation -->
+          <div class="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl flex items-start gap-3 mt-2">
+            <span class="material-icons text-emerald-400 text-lg mt-0.5">verified_user</span>
+            <div class="flex-1">
+              <span class="font-bold text-emerald-300 text-xs">Officially Registered Open Repository</span>
+              <p class="text-[11px] text-emerald-400/80 leading-relaxed mt-1">
+                The official copyleft code-tree is hosted on GitHub. Consumers can audit, fork, or send merge requests to keep improving community-focused grid extensions continuously.
+              </p>
+              <div class="mt-2 flex items-center gap-2">
+                <span class="font-mono text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-semibold">
+                  GNU AGPL-3.0 (Copyleft)
+                </span>
+                <span class="font-mono text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-semibold">
+                  Source: github.com/RHLK/grillelib.git
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+      }
+
+      <!-- STORIES: INTERACTIVE CUSTOM COMPONENT PLAYGROUNDS -->
+      @if (activeStoryMeta(); as meta) {
+        <section class="flex flex-col gap-6">
+          
+          <!-- Component Header Docs -->
+          <div class="flex flex-col gap-2 max-w-4xl">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Library Component</span>
+              <span class="h-1.5 w-1.5 bg-[#22252A] rounded-full"></span>
+              <span class="font-mono text-[11px] text-[#888]">&lt;{{ meta.selector }}&gt;</span>
+            </div>
+            <h2 class="font-display font-bold text-3xl text-white tracking-tight">{{ meta.title }}</h2>
+            <p class="text-[#888] leading-relaxed text-sm">
+              {{ meta.desc }}
+            </p>
+            <div class="bg-[#1A1D21] border border-[#22252A] p-3 rounded-lg text-xs text-amber-400 leading-relaxed flex gap-2 mt-1">
+              <span class="material-icons text-amber-400 text-sm mt-0.5">announcement</span>
+              <div>
+                <strong>Community Gap Solved:</strong> {{ meta.missingFeature }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Sandbox Grid -->
+          <div class="flex flex-col gap-4 mt-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="material-icons text-[#E0E0E0] text-sm">sports_esports</span>
+                <span class="text-xs font-bold text-[#E0E0E0] uppercase tracking-wider">Interactive Playground Sandbox</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <!-- Sandbox Preset Quick Actions -->
+                <button
+                  type="button"
+                  (click)="resetAllGridFilters()"
+                  class="px-2.5 py-1 text-[11px] font-bold text-[#E0E0E0] bg-[#1A1D21] border border-[#22252A] rounded-lg hover:bg-[#25282F] transition-colors cursor-pointer flex items-center gap-1 shadow-2xl"
+                >
+                  <span class="material-icons text-xs text-[#888]">refresh</span> Clear Table Filters
+                </button>
+              </div>
+            </div>
+
+            <!-- Interactive Multi-Panel Sandbox Layout (Columns panel + Grid + Storybook panel) -->
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+              <!-- Left Column Config Panel (Col-span 1) -->
+              <div class="lg:col-span-1 flex flex-col gap-4">
+                <div class="bg-[#14161B] border border-[#22252A] p-4 rounded-2xl shadow-2xl flex flex-col gap-3 h-full">
+                  <div class="flex items-center gap-1.5 border-b border-[#22252A] pb-2">
+                    <span class="material-icons text-emerald-400 text-sm">view_column</span>
+                    <span class="text-xs font-bold text-[#E0E0E0] uppercase tracking-wider">Columns Config</span>
+                  </div>
+
+                  <p class="text-[10px] text-[#888] leading-normal">
+                    AG Grid Community does not include a Columns tool panel. Here we've built a custom reactive columns visibility controller.
+                  </p>
+
+                  <!-- Preset Helpers -->
+                  <div class="grid grid-cols-2 gap-2 mt-1">
+                    <button
+                      type="button"
+                      (click)="showAllColumns()"
+                      class="px-2 py-1 text-[10px] font-bold text-emerald-400 bg-[#1A1D21] hover:bg-[#25282F] border border-emerald-500/20 rounded-md transition-colors cursor-pointer flex items-center justify-center gap-1"
+                      id="btn-show-all-columns"
+                    >
+                      <span class="material-icons text-[10px]">visibility</span> Show All
+                    </button>
+                    <button
+                      type="button"
+                      (click)="hideAllColumnsExceptName()"
+                      class="px-2 py-1 text-[10px] font-bold text-amber-400 bg-[#1A1D21] hover:bg-[#25282F] border border-amber-500/20 rounded-md transition-colors cursor-pointer flex items-center justify-center gap-1"
+                      id="btn-minimal-columns"
+                    >
+                      <span class="material-icons text-[10px]">visibility_off</span> Minimal
+                    </button>
+                  </div>
+
+                  <!-- Dynamic columns list -->
+                  <div class="flex flex-col gap-2 mt-2">
+                    @for (col of allColumnsList; track col.key) {
+                      <label 
+                        class="flex items-center justify-between p-2 rounded-xl bg-[#1A1D21] hover:bg-[#25282F] border border-[#22252A] transition-all cursor-pointer group"
+                        [class.border-emerald-500/30]="columnVisibility()[col.key]"
+                      >
+                        <div class="flex items-center gap-2">
+                          <span class="material-icons text-xs text-[#888] group-hover:text-emerald-400 transition-colors">{{ col.icon }}</span>
+                          <span class="text-xs text-[#BBB] group-hover:text-white font-medium transition-colors">{{ col.label }}</span>
+                        </div>
+                        <div class="relative flex items-center">
+                          <input
+                            type="checkbox"
+                            [checked]="columnVisibility()[col.key]"
+                            (change)="toggleColumn(col.key)"
+                            class="sr-only peer"
+                            id="column-toggle-{{ col.key }}"
+                          />
+                          <div class="w-7 h-4 bg-[#0B0C0E] border border-[#22252A] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-[#888] peer-checked:after:bg-emerald-400 after:border-gray-300 after:border after:rounded-full after:h-2.5 after:w-2.5 after:transition-all peer-checked:bg-emerald-500/20 peer-checked:border-emerald-500/40"></div>
+                        </div>
+                      </label>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <!-- Grid Display Workspace (Col-span 3) -->
+              <div class="lg:col-span-3 flex flex-col gap-3">
+                
+                <!-- Live Embedded AG Grid Community -->
+                <div class="border border-[#22252A] rounded-2xl overflow-hidden shadow-2xl bg-[#14161B] p-2">
+                  <div class="bg-[#1E2128] px-3 py-2 border-b border-[#22252A] flex items-center justify-between text-xs text-[#888] rounded-t-xl">
+                    <span class="font-semibold text-[#E0E0E0] flex items-center gap-1.5">
+                      <span class="material-icons text-xs text-emerald-400">table_chart</span> Live AG Grid Community (quartz dark theme)
+                    </span>
+                    <span class="text-[10px] bg-[#0B0C0E] border border-[#22252A] px-1.5 py-0.5 rounded text-[#888]">
+                      Total Employees: {{ rowData().length }}
+                    </span>
+                  </div>
+                  
+                  <!-- The Actual Grid Instance -->
+                  <div class="ag-theme-quartz ag-theme-quartz-dark w-full" style="height: 380px;">
+                    <ag-grid-angular
+                      [rowData]="rowData()"
+                      [columnDefs]="columnDefs()"
+                      [defaultColDef]="defaultColDef"
+                      [icons]="gridIcons"
+                      [theme]="'legacy'"
+                      (gridReady)="onGridReady($event)"
+                      class="ag-theme-quartz ag-theme-quartz-dark h-full w-full"
+                    />
+                  </div>
+                </div>
+
+                <!-- Live Playground Quick Demonstration Helpers -->
+                <div class="flex flex-col gap-2 p-3.5 bg-[#1A1D21] border border-[#22252A] rounded-xl">
+                  <span class="text-[10px] font-bold text-[#888] uppercase tracking-wider">Interactive Cheat-actions:</span>
+                  
+                  @if (selectedStory() === 'multi-select') {
+                    <div class="flex flex-wrap gap-1.5">
+                      <button
+                        type="button"
+                        (click)="applyDemoFilter('department', { values: ['Engineering'] })"
+                        class="px-2.5 py-1 bg-[#0B0C0E] hover:bg-[#1E2128] border border-[#22252A] text-[#BBB] text-[11px] font-medium rounded-lg transition-colors cursor-pointer"
+                      >
+                        Filter to: Engineering
+                      </button>
+                      <button
+                        type="button"
+                        (click)="applyDemoFilter('department', { values: ['Sales', 'Marketing'] })"
+                        class="px-2.5 py-1 bg-[#0B0C0E] hover:bg-[#1E2128] border border-[#22252A] text-[#BBB] text-[11px] font-medium rounded-lg transition-colors cursor-pointer"
+                      >
+                        Filter to: Sales & Marketing
+                      </button>
+                      <button
+                        type="button"
+                        (click)="applyDemoFilter('status', { values: ['Active'] })"
+                        class="px-2.5 py-1 bg-[#0B0C0E] hover:bg-[#1E2128] border border-[#22252A] text-[#BBB] text-[11px] font-medium rounded-lg transition-colors cursor-pointer"
+                      >
+                        Filter to: Active Employees only
+                      </button>
+                    </div>
+                  } @else if (selectedStory() === 'regex') {
+                    <div class="flex flex-wrap gap-1.5">
+                      <button
+                        type="button"
+                        (click)="applyDemoFilter('name', { pattern: '^Ru|^Ke', caseSensitive: false })"
+                        class="px-2.5 py-1 bg-[#0B0C0E] hover:bg-[#1E2128] border border-[#22252A] text-[#BBB] text-[11px] font-medium rounded-lg transition-colors cursor-pointer"
+                      >
+                        Matches: Starts with "Ru" or "Ke"
+                      </button>
+                      <button
+                        type="button"
+                        (click)="applyDemoFilter('name', { pattern: 'Patel$|Kim$', caseSensitive: false })"
+                        class="px-2.5 py-1 bg-[#0B0C0E] hover:bg-[#1E2128] border border-[#22252A] text-[#BBB] text-[11px] font-medium rounded-lg transition-colors cursor-pointer"
+                      >
+                        Matches: Ends with "Patel" or "Kim"
+                      </button>
+                    </div>
+                  } @else if (selectedStory() === 'date-range') {
+                    <div class="flex flex-wrap gap-1.5">
+                      <button
+                        type="button"
+                        (click)="applyDemoFilter('joinedDate', { activeRange: 'last7' })"
+                        class="px-2.5 py-1 bg-[#0B0C0E] hover:bg-[#1E2128] border border-[#22252A] text-[#BBB] text-[11px] font-medium rounded-lg transition-colors cursor-pointer"
+                      >
+                        Preset: Joined Last 7 Days
+                      </button>
+                      <button
+                        type="button"
+                        (click)="applyDemoFilter('joinedDate', { activeRange: 'last30' })"
+                        class="px-2.5 py-1 bg-[#0B0C0E] hover:bg-[#1E2128] border border-[#22252A] text-[#BBB] text-[11px] font-medium rounded-lg transition-colors cursor-pointer"
+                      >
+                        Preset: Joined Last 30 Days
+                      </button>
+                    </div>
+                  } @else if (selectedStory() === 'smart-ai') {
+                    <div class="flex flex-col gap-1 text-[11px] text-[#888]">
+                      <div class="flex items-center gap-1 text-[#E0E0E0] font-semibold">
+                        <span class="material-icons text-sm text-violet-400">tips_and_updates</span>
+                        <span>How to evaluate with AI:</span>
+                      </div>
+                      <span class="leading-normal">
+                        Click on the <strong>Filter Icon</strong> (emerald funnel button) in any column header cell to open the custom filter popup, or use the interactive sidebar control panel to trigger the filters dynamically!
+                      </span>
+                    </div>
+                  }
+                </div>
+              </div>
+
+              <!-- Side Component Mockup Control Panel (Col-span 1) -->
+              <div class="flex flex-col gap-4">
+                <div class="bg-[#14161B] border border-[#22252A] p-4 rounded-2xl shadow-2xl flex flex-col gap-3">
+                  <div class="flex items-center gap-1.5 border-b border-[#22252A] pb-2">
+                    <span class="material-icons text-emerald-400 text-sm">settings_input_component</span>
+                    <span class="text-xs font-bold text-[#E0E0E0] uppercase tracking-wider">Storybook Panel</span>
+                  </div>
+
+                  <!-- Storybook direct rendering of the custom component outside the grid for direct visual test! -->
+                  <div class="flex flex-col gap-1">
+                    <span class="text-[10px] text-[#888] font-semibold tracking-wide uppercase">Direct Visual Preview</span>
+                    <p class="text-[10px] text-[#888] leading-normal mb-2">Interacting with this floating preview communicates directly with the active table filters.</p>
+                    
+                     <div class="border border-[#22252A] rounded-xl p-1 bg-[#0B0C0E] flex justify-center">
+                      @if (selectedStory() === 'multi-select') {
+                        <!-- Embedded MultiSelect Outside Grid connected to Department column filter -->
+                        <app-multi-select-filter
+                          [params]="$any({
+                            api: gridApi,
+                            column: null,
+                            colDef: null,
+                            context: null,
+                            filterChangedCallback: resetAllGridFilters,
+                            getValue: null
+                          })"
+                        />
+                      } @else if (selectedStory() === 'regex') {
+                        <app-regex-filter
+                          [params]="$any({
+                            api: gridApi,
+                            filterChangedCallback: resetAllGridFilters,
+                            getValue: null
+                          })"
+                        />
+                      } @else if (selectedStory() === 'date-range') {
+                        <app-date-range-filter
+                          [params]="$any({
+                            api: gridApi,
+                            filterChangedCallback: resetAllGridFilters,
+                            getValue: null
+                          })"
+                        />
+                      } @else if (selectedStory() === 'smart-ai') {
+                        <app-smart-ai-filter
+                          [params]="$any({
+                            api: gridApi,
+                            filterChangedCallback: resetAllGridFilters,
+                            getValue: null
+                          })"
+                        />
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Documentation & Integration Code Blocks -->
+          <div class="bg-[#14161B] border border-[#22252A] rounded-2xl shadow-2xl mt-4 overflow-hidden">
+            <!-- Tabs Header -->
+            <div class="bg-[#1E2128] px-6 py-3 border-b border-[#22252A] flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <button
+                  type="button"
+                  (click)="selectedCodeTab.set('usage')"
+                  class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer"
+                  [class.bg-[#14161B]]="selectedCodeTab() === 'usage'"
+                  [class.text-white]="selectedCodeTab() === 'usage'"
+                  [class.shadow-2xl]="selectedCodeTab() === 'usage'"
+                  [class.text-[#888]]="selectedCodeTab() !== 'usage'"
+                  [class.hover:text-[#BBB]]="selectedCodeTab() !== 'usage'"
+                >
+                  Consumer Integration (How to Use)
+                </button>
+                <button
+                  type="button"
+                  (click)="selectedCodeTab.set('source')"
+                  class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer"
+                  [class.bg-[#14161B]]="selectedCodeTab() === 'source'"
+                  [class.text-white]="selectedCodeTab() === 'source'"
+                  [class.shadow-2xl]="selectedCodeTab() === 'source'"
+                  [class.text-[#888]]="selectedCodeTab() !== 'source'"
+                  [class.hover:text-[#BBB]]="selectedCodeTab() !== 'source'"
+                >
+                  Filter Source Code
+                </button>
+              </div>
+
+              <!-- Clipboard Button -->
+              <button
+                type="button"
+                (click)="copyCodeToClipboard()"
+                class="px-3 py-1.5 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                [class.bg-emerald-500/10]="copiedState()"
+                [class.text-emerald-400]="copiedState()"
+                [class.bg-[#14161B]]="!copiedState()"
+                [class.text-[#BBB]]="!copiedState()"
+                [class.border]="!copiedState()"
+                [class.border-[#22252A]]="!copiedState()"
+                [class.hover:bg-[#1A1D21]]="!copiedState()"
+              >
+                <span class="material-icons text-sm">{{ copiedState() ? 'done' : 'content_copy' }}</span>
+                <span>{{ copiedState() ? 'Copied!' : 'Copy Code' }}</span>
+              </button>
+            </div>
+
+            <!-- Code block wrapper -->
+            <div class="p-6 font-mono text-xs bg-[#0B0C0E] text-[#BBB] overflow-x-auto leading-relaxed max-h-[420px] overflow-y-auto border-t border-[#22252A]">
+              @if (selectedCodeTab() === 'usage') {
+                <pre>{{ activeUsageCode() }}</pre>
+              } @else {
+                <pre>{{ activeSourceCode() }}</pre>
+              }
+            </div>
+          </div>
+        </section>
+      }
+    </main>
+  </div>
+</div>

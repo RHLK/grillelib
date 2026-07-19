@@ -1,0 +1,6 @@
+{
+  "name": "GrilleLib: AG Grid Custom Filters",
+  "description": "Storybook documentation & live playgrounds for grillelib: a collection of advanced custom filter components for AG Grid Community version (Angular standalone). Fully open-source with GNU GPL Copyleft License.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
