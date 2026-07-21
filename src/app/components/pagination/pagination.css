@@ -1,0 +1,127 @@
+:host {
+  /* Fonts */
+  --pg-font-sans: var(--app-font-sans, "Inter", ui-sans-serif, system-ui, sans-serif);
+  --pg-font-mono: var(--app-font-mono, "JetBrains Mono", ui-monospace, SFMono-Regular, monospace);
+
+  /* Backgrounds */
+  --pg-bg-footer: var(--app-bg-secondary, #1E2128);
+  --pg-bg-inset: var(--app-bg-inset, #0B0C0E);
+  --pg-bg-compact: var(--app-bg-tertiary, #1A1D21);
+  --pg-bg-hover: var(--app-btn-hover-bg, #25282F);
+
+  /* Borders & Shadows */
+  --pg-border-color: var(--app-border-color, #22252A);
+  --pg-shadow: var(--app-shadow, 0 10px 15px -3px rgba(0, 0, 0, 0.3));
+
+  /* Accents & Active States */
+  --pg-accent: var(--app-accent-color, #10B981); /* emerald-500 */
+  --pg-accent-hover: var(--app-accent-hover, #34D399); /* emerald-400 */
+  --pg-accent-text: var(--app-accent-text, #000000);
+
+  /* Text Colors */
+  --pg-text-primary: var(--app-text-primary, #FFFFFF);
+  --pg-text-secondary: var(--app-text-secondary, #BBB);
+  --pg-text-muted: var(--app-text-muted, #888);
+
+  /* Radius */
+  --pg-radius: var(--app-radius-xl, 0.75rem);
+  --pg-radius-inner: var(--app-radius-lg, 0.5rem);
+}
+
+/* Structural & Color Classes */
+.pagination-footer-container {
+  background-color: var(--pg-bg-footer);
+  border-top: 1px solid var(--pg-border-color);
+  border-bottom-left-radius: var(--pg-radius);
+  border-bottom-right-radius: var(--pg-radius);
+}
+
+.pagination-text-mono {
+  font-family: var(--pg-font-mono);
+  color: var(--pg-text-secondary);
+}
+
+.pagination-badge {
+  color: var(--pg-text-primary);
+  background-color: var(--pg-bg-inset);
+  border: 1px solid var(--pg-border-color);
+  border-radius: 0.25rem;
+}
+
+.pagination-size-container {
+  background-color: var(--pg-bg-inset);
+  border: 1px solid var(--pg-border-color);
+}
+
+.pagination-size-btn {
+  font-family: var(--pg-font-mono);
+  color: var(--pg-text-muted);
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination-size-btn:hover:not(.active) {
+  color: var(--pg-text-primary);
+}
+
+.pagination-size-btn.active {
+  background-color: var(--pg-accent);
+  color: var(--pg-accent-text);
+}
+
+/* Accents and highlights */
+.pg-accent-color {
+  color: var(--pg-accent);
+}
+
+.pg-accent-color-hover:hover {
+  color: var(--pg-accent-hover);
+}
+
+/* Buttons */
+.pagination-btn-secondary {
+  background-color: var(--pg-bg-inset);
+  border: 1px solid var(--pg-border-color);
+  color: var(--pg-text-secondary);
+  transition: all 0.15s ease-in-out;
+}
+
+.pagination-btn-secondary:hover:not(:disabled) {
+  background-color: var(--pg-bg-hover);
+  color: var(--pg-text-primary);
+}
+
+.pagination-btn-primary {
+  background-color: var(--pg-accent);
+  color: var(--pg-accent-text);
+  transition: all 0.15s ease-in-out;
+}
+
+.pagination-btn-primary:hover:not(:disabled) {
+  background-color: var(--pg-accent-hover);
+}
+
+.pagination-btn-primary:disabled {
+  background-color: var(--pg-bg-inset);
+  border: 1px solid var(--pg-border-color);
+  color: var(--pg-text-secondary);
+}
+
+/* Compact specific */
+.pagination-compact-stats {
+  background-color: var(--pg-bg-compact);
+  border: 1px solid var(--pg-border-color);
+  border-radius: var(--pg-radius);
+  color: var(--pg-text-secondary);
+}
+
+.pagination-compact-btn {
+  background-color: var(--pg-bg-compact);
+  border: 1px solid var(--pg-border-color);
+  color: var(--pg-text-secondary);
+  transition: all 0.15s ease-in-out;
+}
+
+.pagination-compact-btn:hover:not(:disabled) {
+  background-color: var(--pg-bg-hover);
+  color: var(--pg-text-primary);
+}

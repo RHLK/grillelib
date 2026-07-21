@@ -1,0 +1,223 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  --app-accent-color: #10b981; /* emerald-500 default */
+  --app-accent-hover: #34d399; /* emerald-400 */
+  
+  /* Grid specific tokens for theme independence */
+  --app-grid-id-color: #34d399;
+  --app-grid-title-color: #ffffff;
+  --app-grid-download-btn-bg: rgba(16, 185, 129, 0.1);
+  --app-grid-download-btn-hover: rgba(16, 185, 129, 0.25);
+  --app-grid-download-btn-color: #34d399;
+  --app-grid-download-btn-border: rgba(16, 185, 129, 0.2);
+}
+
+/* Classical Financial Theme: Soft Elegant Pink & Beige, Serif look */
+.theme-classic-financial {
+  /* Base Style Tokens */
+  --app-font-sans: "Georgia", "Times New Roman", serif;
+  --app-font-mono: "Courier New", Courier, monospace;
+
+  --panel-font-sans: "Georgia", "Times New Roman", serif;
+  --panel-font-mono: "Courier New", Courier, monospace;
+
+  /* Colors */
+  --app-bg-primary: #FDFBF7;
+  --app-bg-secondary: #F7F3EB;
+  --app-bg-inset: #F0EAE1;
+  --app-bg-tertiary: #FDFBF7;
+  --app-bg-hover: #F2EBE1;
+
+  --app-border-color: #D2C7B1;
+  
+  --app-text-primary: #1C1917;
+  --app-text-secondary: #3B3630;
+  --app-text-muted: #7E7264;
+  --app-text-body: #2C2621;
+
+  --app-accent-color: #AC4E68; /* Soft Elegant Classic Muted Pink */
+  --app-accent-hover: #C26580; /* Muted brighter rose */
+  --app-accent-text: #FFFFFF;
+  --app-accent-rgb: 172, 78, 104;
+
+  --app-warning-color: #92400E;
+  --app-warning-hover: #B45309;
+
+  --app-radius-xl: 0.375rem; /* Sharp elegant classical borders */
+  --app-radius-lg: 0.25rem;
+  --app-radius-md: 0.125rem;
+
+  /* Overridden Grid dynamic colors for Theme Independence */
+  --app-grid-id-color: #AC4E68;
+  --app-grid-title-color: #1C1917;
+  --app-grid-download-btn-bg: rgba(172, 78, 104, 0.1);
+  --app-grid-download-btn-hover: rgba(172, 78, 104, 0.25);
+  --app-grid-download-btn-color: #AC4E68;
+  --app-grid-download-btn-border: rgba(172, 78, 104, 0.2);
+
+  font-family: var(--app-font-sans);
+}
+
+/* Target smaller icons inside the classic financial theme */
+.theme-classic-financial .material-icons {
+  font-size: 0.85rem !important;
+  font-weight: normal;
+}
+
+/* AG Grid quartz override for Classic Theme */
+.theme-classic-financial .ag-theme-quartz {
+  --ag-font-family: "Georgia", serif;
+  --ag-background-color: #FDFBF7;
+  --ag-header-background-color: #F7F3EB;
+  --ag-header-foreground-color: #1C1917;
+  --ag-foreground-color: #2C2621;
+  --ag-border-color: #D2C7B1;
+  --ag-row-hover-color: #F7ECE6;
+  --ag-selected-row-background-color: #EEDCCE;
+  --ag-odd-row-background-color: #FAF8F2;
+  --ag-font-size: 11px;
+  --ag-header-cell-hover-background-color: #F2EBE1;
+  --ag-input-focus-border-color: #AC4E68;
+}
+
+/* Classic Financial Theme Root and Layout Overrides to prevent green leaks */
+.theme-classic-financial.min-h-screen {
+  background-color: var(--app-bg-primary) !important;
+  color: var(--app-text-primary) !important;
+}
+.theme-classic-financial header {
+  background-color: var(--app-bg-secondary) !important;
+  border-bottom-color: var(--app-border-color) !important;
+}
+.theme-classic-financial header h1 {
+  color: var(--app-text-primary) !important;
+}
+.theme-classic-financial header p {
+  color: var(--app-text-muted) !important;
+}
+.theme-classic-financial header .bg-emerald-500 {
+  background-color: var(--app-accent-color) !important;
+  color: var(--app-accent-text) !important;
+}
+.theme-classic-financial header .bg-\[\#1A1D21\] {
+  background-color: var(--app-bg-inset) !important;
+  border-color: var(--app-border-color) !important;
+  color: var(--app-text-secondary) !important;
+}
+.theme-classic-financial header .bg-emerald-500.rounded-full {
+  background-color: var(--app-accent-color) !important;
+}
+.theme-classic-financial aside {
+  background-color: var(--app-bg-secondary) !important;
+  border-right-color: var(--app-border-color) !important;
+}
+.theme-classic-financial aside .bg-\[\#1A1D21\] {
+  background-color: var(--app-bg-primary) !important;
+  border-color: var(--app-border-color) !important;
+}
+.theme-classic-financial aside .text-\[\#E0E0E0\] {
+  color: var(--app-text-primary) !important;
+}
+.theme-classic-financial aside .text-\[\#BBB\] {
+  color: var(--app-text-secondary) !important;
+}
+.theme-classic-financial aside .text-\[\#888\] {
+  color: var(--app-text-muted) !important;
+}
+.theme-classic-financial aside .text-\[\#555\] {
+  color: var(--app-text-muted) !important;
+  opacity: 0.8;
+}
+.theme-classic-financial aside .bg-emerald-500\/10 {
+  background-color: rgba(172, 78, 104, 0.1) !important;
+  color: var(--app-accent-color) !important;
+  border-color: rgba(172, 78, 104, 0.2) !important;
+}
+.theme-classic-financial aside .border-emerald-500\/20 {
+  border-color: rgba(172, 78, 104, 0.2) !important;
+}
+.theme-classic-financial aside .text-emerald-400 {
+  color: var(--app-accent-color) !important;
+}
+.theme-classic-financial aside button:hover {
+  background-color: var(--app-bg-hover) !important;
+}
+.theme-classic-financial .text-white {
+  color: var(--app-text-primary) !important;
+}
+.theme-classic-financial .text-\[\#888\] {
+  color: var(--app-text-muted) !important;
+}
+.theme-classic-financial .text-emerald-400 {
+  color: var(--app-accent-color) !important;
+}
+.theme-classic-financial .text-violet-400 {
+  color: var(--app-accent-color) !important;
+}
+.theme-classic-financial .bg-emerald-500 {
+  background-color: var(--app-accent-color) !important;
+  color: var(--app-accent-text) !important;
+}
+.theme-classic-financial .bg-emerald-500\/10 {
+  background-color: rgba(172, 78, 104, 0.1) !important;
+  border-color: rgba(172, 78, 104, 0.2) !important;
+}
+.theme-classic-financial .bg-emerald-500\/10 .text-emerald-400 {
+  color: var(--app-accent-color) !important;
+}
+.theme-classic-financial .bg-\[\#14161B\] {
+  background-color: var(--app-bg-secondary) !important;
+  border-color: var(--app-border-color) !important;
+}
+.theme-classic-financial .border-\[\#22252A\] {
+  border-color: var(--app-border-color) !important;
+}
+.theme-classic-financial .bg-\[\#1A1D21\] {
+  background-color: var(--app-bg-inset) !important;
+  border-color: var(--app-border-color) !important;
+}
+.theme-classic-financial .bg-\[\#0B0C0E\] {
+  background-color: var(--app-bg-primary) !important;
+  border-color: var(--app-border-color) !important;
+}
+.theme-classic-financial .bg-emerald-500:hover,
+.theme-classic-financial .hover\:bg-emerald-400:hover {
+  background-color: var(--app-accent-hover) !important;
+}
+.theme-classic-financial pre {
+  color: var(--app-text-body) !important;
+}
+
+/* Custom grid viewport scrollbars to make sure scrollbars are always beautifully visible and themed */
+.ag-body-viewport::-webkit-scrollbar {
+  width: 10px !important;
+  height: 10px !important;
+  display: block !important;
+}
+.ag-body-viewport::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+.ag-body-viewport::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.4) !important;
+  border-radius: 6px !important;
+  border: 2px solid transparent !important;
+  background-clip: padding-box !important;
+}
+.ag-body-viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.7) !important;
+  border: 2px solid transparent !important;
+  background-clip: padding-box !important;
+}
+
+/* Classic Financial theme scrollbar colors */
+.theme-classic-financial .ag-body-viewport::-webkit-scrollbar-track {
+  background: #F0EAE1 !important;
+}
+.theme-classic-financial .ag-body-viewport::-webkit-scrollbar-thumb {
+  background: rgba(172, 78, 104, 0.4) !important;
+}
+.theme-classic-financial .ag-body-viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(172, 78, 104, 0.7) !important;
+}

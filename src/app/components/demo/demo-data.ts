@@ -8,6 +8,21 @@ export interface Employee {
   status: string;
 }
 
+export interface BookAuthor {
+  name: string;
+  birth_year?: number;
+  death_year?: number;
+}
+
+export interface GutendexBook {
+  id: number;
+  title: string;
+  authors: BookAuthor[];
+  languages: string[];
+  subjects: string[];
+  download_count: number;
+}
+
 export const EMPLOYEES_DATA: Employee[] = [
   { id: 'emp_01', name: 'Ruth Herlin', role: 'Lead Systems Architect', department: 'Engineering', salary: 125000, joinedDate: '2024-03-15', status: 'Active' },
   { id: 'emp_02', name: 'Kenji Sato', role: 'Senior Frontend Engineer', department: 'Engineering', salary: 98000, joinedDate: '2025-06-10', status: 'Active' },

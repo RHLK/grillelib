@@ -1,0 +1,96 @@
+<div class="reusable-panel">
+  <!-- Header with icons -->
+  <div class="panel-header">
+    <span class="material-icons text-sm" style="color: var(--panel-accent)">view_column</span>
+    <span class="panel-title">Columns Config</span>
+  </div>
+
+  <p class="panel-description">
+    AG Grid Community does not include a Columns side panel. This custom component provides reactive column visibility control.
+  </p>
+
+  <!-- Position Controller inside the panel -->
+  <div class="flex flex-col gap-1 panel-section-divider pb-3.5 mb-1.5">
+    <span class="text-[10px] text-[#888] font-bold uppercase tracking-wider mb-1">Panel Placement</span>
+    <div class="grid grid-cols-2 gap-1.5">
+      <button
+        type="button"
+        (click)="position.set('left')"
+        class="panel-pos-btn px-2 py-1.5 text-[10px] font-semibold rounded-md flex items-center justify-center gap-1 cursor-pointer w-full"
+        [class.active]="position() === 'left'"
+        id="pos-left-btn"
+      >
+        <span class="material-icons text-xs">align_horizontal_left</span> Left Side
+      </button>
+      <button
+        type="button"
+        (click)="position.set('right')"
+        class="panel-pos-btn px-2 py-1.5 text-[10px] font-semibold rounded-md flex items-center justify-center gap-1 cursor-pointer w-full"
+        [class.active]="position() === 'right'"
+        id="pos-right-btn"
+      >
+        Right Side <span class="material-icons text-xs">align_horizontal_right</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Preset Helpers using reusable styles -->
+  <div class="panel-presets">
+    <button
+      type="button"
+      (click)="showAllColumns()"
+      class="panel-preset-btn panel-preset-btn-emerald"
+      id="btn-show-all-columns"
+    >
+      <span class="material-icons text-[10px]">visibility</span> Show All
+    </button>
+    <button
+      type="button"
+      (click)="hideAllColumnsExceptName()"
+      class="panel-preset-btn panel-preset-btn-amber"
+      id="btn-minimal-columns"
+    >
+      <span class="material-icons text-[10px]">visibility_off</span> Minimal
+    </button>
+  </div>
+
+  <!-- Dynamic columns list using reusable styles -->
+  <div class="panel-list">
+    @for (col of columns(); track col.key) {
+      <label 
+        class="panel-item-label"
+        [class.panel-item-label-active]="visibility()[col.key]"
+      >
+        <div class="panel-item-content">
+          <span class="material-icons panel-item-icon">{{ col.icon }}</span>
+          <span class="panel-item-text">{{ col.label }}</span>
+        </div>
+        <div class="relative flex items-center">
+          <input
+            type="checkbox"
+            [checked]="visibility()[col.key]"
+            (change)="toggleColumn(col.key)"
+            class="panel-checkbox-hidden"
+            id="column-toggle-{{ col.key }}"
+          />
+          <div class="panel-switch-track">
+            <div class="panel-switch-thumb"></div>
+          </div>
+        </div>
+      </label>
+    }
+  </div>
+
+  @if (paginationInfo(); as info) {
+    <div class="mt-4 pt-4" style="border-top: 1px solid var(--panel-border-color)">
+      <app-pagination
+        layout="compact"
+        [totalCount]="info.totalCount"
+        [currentPage]="info.currentPage"
+        [pageSize]="info.pageSize"
+        [loading]="info.loading"
+        (pageChanged)="onCompactPageChange($event)"
+      />
+    </div>
+  }
+</div>

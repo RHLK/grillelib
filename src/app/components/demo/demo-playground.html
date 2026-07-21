@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-[#0B0C0E] text-[#E0E0E0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
+<div class="min-h-screen bg-[#0B0C0E] text-[#E0E0E0] flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-200 transition-all duration-300" [class.theme-classic-financial]="selectedTheme() === 'classic'">
   <!-- Top Header Bar -->
   <header class="bg-[#0E1013] border-b border-[#22252A] px-6 py-3.5 flex items-center justify-between sticky top-0 z-50">
     <div class="flex items-center gap-2.5">
@@ -158,28 +158,81 @@
               </button>
             </div>
           </div>
+
+          <!-- Section 3 -->
+          <div class="flex flex-col gap-1.5">
+            <span class="text-[10px] font-bold text-[#555] uppercase tracking-wider px-2">Async Integrations</span>
+            <div class="flex flex-col gap-0.5">
+              <button
+                type="button"
+                (click)="selectStory('gutenberg-books')"
+                class="w-full text-left px-2.5 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-between transition-colors cursor-pointer"
+                [class.bg-emerald-500/10]="selectedStory() === 'gutenberg-books'"
+                [class.text-emerald-400]="selectedStory() === 'gutenberg-books'"
+                [class.border]="selectedStory() === 'gutenberg-books'"
+                [class.border-emerald-500/20]="selectedStory() === 'gutenberg-books'"
+                [class.bg-transparent]="selectedStory() !== 'gutenberg-books'"
+                [class.text-[#BBB]]="selectedStory() !== 'gutenberg-books'"
+                [class.hover:bg-[#1A1D21]/50]="selectedStory() !== 'gutenberg-books'"
+                id="btn-story-gutenberg-books"
+              >
+                <span class="flex items-center gap-2 font-semibold">
+                  <span class="material-icons text-sm" [class.text-emerald-400]="selectedStory() === 'gutenberg-books'">auto_stories</span>
+                  Gutenberg Books
+                </span>
+                <span class="text-[9px] bg-emerald-500/10 border border-emerald-500/20 px-1 py-0.2 rounded font-bold text-emerald-400">API</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Section 4 -->
+          <div class="flex flex-col gap-1.5">
+            <span class="text-[10px] font-bold text-[#555] uppercase tracking-wider px-2">Reusable Components</span>
+            <div class="flex flex-col gap-0.5">
+              <button
+                type="button"
+                (click)="selectStory('columns-config')"
+                class="w-full text-left px-2.5 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-between transition-colors cursor-pointer"
+                [class.bg-emerald-500/10]="selectedStory() === 'columns-config'"
+                [class.text-emerald-400]="selectedStory() === 'columns-config'"
+                [class.border]="selectedStory() === 'columns-config'"
+                [class.border-emerald-500/20]="selectedStory() === 'columns-config'"
+                [class.bg-transparent]="selectedStory() !== 'columns-config'"
+                [class.text-[#BBB]]="selectedStory() !== 'columns-config'"
+                [class.hover:bg-[#1A1D21]/50]="selectedStory() !== 'columns-config'"
+                id="btn-story-columns-config"
+              >
+                <span class="flex items-center gap-2 font-semibold">
+                  <span class="material-icons text-sm" [class.text-emerald-400]="selectedStory() === 'columns-config'">view_week</span>
+                  Columns Config Panel
+                </span>
+                <span class="text-[9px] bg-emerald-500/10 border border-emerald-500/20 px-1 py-0.2 rounded font-bold text-emerald-400">UI</span>
+              </button>
+
+              <button
+                type="button"
+                (click)="selectStory('pagination')"
+                class="w-full text-left px-2.5 py-1.5 text-xs font-semibold rounded-lg flex items-center justify-between transition-colors cursor-pointer"
+                [class.bg-emerald-500/10]="selectedStory() === 'pagination'"
+                [class.text-emerald-400]="selectedStory() === 'pagination'"
+                [class.border]="selectedStory() === 'pagination'"
+                [class.border-emerald-500/20]="selectedStory() === 'pagination'"
+                [class.bg-transparent]="selectedStory() !== 'pagination'"
+                [class.text-[#BBB]]="selectedStory() !== 'pagination'"
+                [class.hover:bg-[#1A1D21]/50]="selectedStory() !== 'pagination'"
+                id="btn-story-pagination"
+              >
+                <span class="flex items-center gap-2 font-semibold">
+                  <span class="material-icons text-sm" [class.text-emerald-400]="selectedStory() === 'pagination'">last_page</span>
+                  Reusable Pagination
+                </span>
+                <span class="text-[9px] bg-emerald-500/10 border border-emerald-500/20 px-1 py-0.2 rounded font-bold text-emerald-400">CTRL</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Repo Footer Card -->
-      <div class="p-4 border-t border-[#22252A] bg-[#0E1013]">
-        <div class="flex flex-col gap-2 p-3 bg-[#14161B] border border-[#22252A] rounded-xl shadow-2xl">
-          <div class="flex items-center gap-1.5">
-            <span class="material-icons text-emerald-400 text-sm">link</span>
-            <span class="text-[11px] font-bold text-[#E0E0E0] tracking-tight">GitHub Project Repo</span>
-          </div>
-          <p class="text-[10px] text-[#888] leading-normal font-mono truncate">
-            https://github.com/RHLK/grillelib.git
-          </p>
-          <a
-            href="https://github.com/RHLK/grillelib.git"
-            target="_blank"
-            class="text-[10px] font-bold text-emerald-400 hover:text-emerald-300 hover:underline flex items-center gap-0.5 mt-1 cursor-pointer"
-          >
-            Open Repository <span class="material-icons text-xs">launch</span>
-          </a>
-        </div>
-      </div>
     </aside>
 
     <!-- Main Workspace Sandbox Container -->
@@ -284,21 +337,90 @@
           </div>
 
           <!-- Legal Badge representation -->
-          <div class="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl flex items-start gap-3 mt-2">
-            <span class="material-icons text-emerald-400 text-lg mt-0.5">verified_user</span>
+          <div 
+            class="p-4 rounded-xl flex items-start gap-3 mt-2 border transition-all duration-300"
+            [class.bg-emerald-500/10]="selectedTheme() === 'dark'"
+            [class.border-emerald-500/20]="selectedTheme() === 'dark'"
+            [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-bg-secondary)' : null"
+            [style.border-color]="selectedTheme() === 'classic' ? 'var(--app-border-color)' : null"
+          >
+            <span 
+              class="material-icons text-lg mt-0.5"
+              [class.text-emerald-400]="selectedTheme() === 'dark'"
+              [style.color]="selectedTheme() === 'classic' ? 'var(--app-accent-color)' : null"
+            >verified_user</span>
             <div class="flex-1">
-              <span class="font-bold text-emerald-300 text-xs">Officially Registered Open Repository</span>
-              <p class="text-[11px] text-emerald-400/80 leading-relaxed mt-1">
+              <span 
+                class="font-bold text-xs"
+                [class.text-emerald-300]="selectedTheme() === 'dark'"
+                [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-primary)' : null"
+              >Officially Registered Open Repository</span>
+              <p 
+                class="text-[11px] leading-relaxed mt-1"
+                [class.text-emerald-400/80]="selectedTheme() === 'dark'"
+                [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-secondary)' : null"
+              >
                 The official copyleft code-tree is hosted on GitHub. Consumers can audit, fork, or send merge requests to keep improving community-focused grid extensions continuously.
               </p>
-              <div class="mt-2 flex items-center gap-2">
-                <span class="font-mono text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-semibold">
+              <div class="mt-2 flex items-center gap-2 flex-wrap">
+                <span 
+                  class="font-mono text-[10px] border px-2 py-0.5 rounded font-semibold"
+                  [class.bg-emerald-500/10]="selectedTheme() === 'dark'"
+                  [class.text-emerald-400]="selectedTheme() === 'dark'"
+                  [class.border-emerald-500/20]="selectedTheme() === 'dark'"
+                  [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-bg-inset)' : null"
+                  [style.border-color]="selectedTheme() === 'classic' ? 'var(--app-border-color)' : null"
+                  [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-muted)' : null"
+                >
                   GNU AGPL-3.0 (Copyleft)
                 </span>
-                <span class="font-mono text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-semibold">
+                <span 
+                  class="font-mono text-[10px] border px-2 py-0.5 rounded font-semibold"
+                  [class.bg-emerald-500/10]="selectedTheme() === 'dark'"
+                  [class.text-emerald-400]="selectedTheme() === 'dark'"
+                  [class.border-emerald-500/20]="selectedTheme() === 'dark'"
+                  [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-bg-inset)' : null"
+                  [style.border-color]="selectedTheme() === 'classic' ? 'var(--app-border-color)' : null"
+                  [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-muted)' : null"
+                >
                   Source: github.com/RHLK/grillelib.git
                 </span>
               </div>
+            </div>
+          </div>
+
+          <!-- Repository Details Tile moved from the Left Sidebar Panel -->
+          <div 
+            class="border p-5 rounded-xl flex flex-col gap-3 transition-colors duration-300 shadow-2xl mt-4"
+            [class.bg-[#14161B]]="selectedTheme() === 'dark'"
+            [class.border-[#22252A]]="selectedTheme() === 'dark'"
+            [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-bg-secondary)' : null"
+            [style.border-color]="selectedTheme() === 'classic' ? 'var(--app-border-color)' : null"
+          >
+            <div class="flex items-center gap-2 font-semibold text-xs"
+                 [class.text-emerald-400]="selectedTheme() === 'dark'"
+                 [style.color]="selectedTheme() === 'classic' ? 'var(--app-accent-color)' : null"
+            >
+              <span class="material-icons text-base">link</span>
+              <span>GitHub Project Repository</span>
+            </div>
+            <p class="text-xs font-mono leading-normal truncate"
+               [class.text-[#888]]="selectedTheme() === 'dark'"
+               [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-secondary)' : null"
+            >
+              https://github.com/RHLK/grillelib.git
+            </p>
+            <div>
+              <a
+                href="https://github.com/RHLK/grillelib.git"
+                target="_blank"
+                class="text-xs font-bold transition-colors inline-flex items-center gap-1 hover:underline cursor-pointer"
+                [class.text-emerald-400]="selectedTheme() === 'dark'"
+                [class.hover:text-emerald-300]="selectedTheme() === 'dark'"
+                [style.color]="selectedTheme() === 'classic' ? 'var(--app-accent-color)' : null"
+              >
+                Open Official Repository <span class="material-icons text-xs">launch</span>
+              </a>
             </div>
           </div>
         </section>
@@ -329,12 +451,38 @@
 
           <!-- Interactive Sandbox Grid -->
           <div class="flex flex-col gap-4 mt-2">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between flex-wrap gap-2">
               <div class="flex items-center gap-1.5">
                 <span class="material-icons text-[#E0E0E0] text-sm">sports_esports</span>
                 <span class="text-xs font-bold text-[#E0E0E0] uppercase tracking-wider">Interactive Playground Sandbox</span>
               </div>
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <!-- Dynamic Theme Switcher for customizability showcase -->
+                <div class="flex items-center gap-1 bg-[#1A1D21] border border-[#22252A] rounded-lg p-0.5 shadow-2xl">
+                  <button
+                    type="button"
+                    (click)="selectedTheme.set('dark')"
+                    class="px-2.5 py-1 rounded text-[9px] font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1"
+                    [class.bg-emerald-500]="selectedTheme() === 'dark'"
+                    [class.text-black]="selectedTheme() === 'dark'"
+                    [class.text-[#888]]="selectedTheme() !== 'dark'"
+                    id="theme-dark-btn"
+                  >
+                    <span class="material-icons text-[11px]">dark_mode</span> Tech Dark
+                  </button>
+                  <button
+                    type="button"
+                    (click)="selectedTheme.set('classic')"
+                    class="px-2.5 py-1 rounded text-[9px] font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1"
+                    [class.bg-[#AC4E68]]="selectedTheme() === 'classic'"
+                    [class.text-white]="selectedTheme() === 'classic'"
+                    [class.text-[#888]]="selectedTheme() !== 'classic'"
+                    id="theme-classic-btn"
+                  >
+                    <span class="material-icons text-[11px]">account_balance</span> Classic Financial
+                  </button>
+                </div>
+
                 <!-- Sandbox Preset Quick Actions -->
                 <button
                   type="button"
@@ -347,82 +495,149 @@
             </div>
 
             <!-- Interactive Multi-Panel Sandbox Layout (Columns panel + Grid + Storybook panel) -->
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6" [class.theme-classic-financial]="selectedTheme() === 'classic'">
               <!-- Left Column Config Panel (Col-span 1) -->
-              <div class="lg:col-span-1 flex flex-col gap-4">
-                <div class="bg-[#14161B] border border-[#22252A] p-4 rounded-2xl shadow-2xl flex flex-col gap-3 h-full">
-                  <div class="flex items-center gap-1.5 border-b border-[#22252A] pb-2">
-                    <span class="material-icons text-emerald-400 text-sm">view_column</span>
-                    <span class="text-xs font-bold text-[#E0E0E0] uppercase tracking-wider">Columns Config</span>
-                  </div>
-
-                  <p class="text-[10px] text-[#888] leading-normal">
-                    AG Grid Community does not include a Columns tool panel. Here we've built a custom reactive columns visibility controller.
-                  </p>
-
-                  <!-- Preset Helpers -->
-                  <div class="grid grid-cols-2 gap-2 mt-1">
-                    <button
-                      type="button"
-                      (click)="showAllColumns()"
-                      class="px-2 py-1 text-[10px] font-bold text-emerald-400 bg-[#1A1D21] hover:bg-[#25282F] border border-emerald-500/20 rounded-md transition-colors cursor-pointer flex items-center justify-center gap-1"
-                      id="btn-show-all-columns"
-                    >
-                      <span class="material-icons text-[10px]">visibility</span> Show All
-                    </button>
-                    <button
-                      type="button"
-                      (click)="hideAllColumnsExceptName()"
-                      class="px-2 py-1 text-[10px] font-bold text-amber-400 bg-[#1A1D21] hover:bg-[#25282F] border border-amber-500/20 rounded-md transition-colors cursor-pointer flex items-center justify-center gap-1"
-                      id="btn-minimal-columns"
-                    >
-                      <span class="material-icons text-[10px]">visibility_off</span> Minimal
-                    </button>
-                  </div>
-
-                  <!-- Dynamic columns list -->
-                  <div class="flex flex-col gap-2 mt-2">
-                    @for (col of allColumnsList; track col.key) {
-                      <label 
-                        class="flex items-center justify-between p-2 rounded-xl bg-[#1A1D21] hover:bg-[#25282F] border border-[#22252A] transition-all cursor-pointer group"
-                        [class.border-emerald-500/30]="columnVisibility()[col.key]"
-                      >
-                        <div class="flex items-center gap-2">
-                          <span class="material-icons text-xs text-[#888] group-hover:text-emerald-400 transition-colors">{{ col.icon }}</span>
-                          <span class="text-xs text-[#BBB] group-hover:text-white font-medium transition-colors">{{ col.label }}</span>
-                        </div>
-                        <div class="relative flex items-center">
-                          <input
-                            type="checkbox"
-                            [checked]="columnVisibility()[col.key]"
-                            (change)="toggleColumn(col.key)"
-                            class="sr-only peer"
-                            id="column-toggle-{{ col.key }}"
-                          />
-                          <div class="w-7 h-4 bg-[#0B0C0E] border border-[#22252A] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-[#888] peer-checked:after:bg-emerald-400 after:border-gray-300 after:border after:rounded-full after:h-2.5 after:w-2.5 after:transition-all peer-checked:bg-emerald-500/20 peer-checked:border-emerald-500/40"></div>
-                        </div>
-                      </label>
-                    }
-                  </div>
+              @if (columnsPanelPosition() === 'left') {
+                <div class="lg:col-span-1 flex flex-col gap-4">
+                  <app-columns-config
+                    [(visibility)]="columnVisibility"
+                    [columns]="activeColumnsList()"
+                    [(position)]="columnsPanelPosition"
+                    [paginationInfo]="selectedStory() === 'gutenberg-books' ? booksPaginationInfo() : null"
+                    (pageChange)="onBooksPageChange($event)"
+                  />
                 </div>
-              </div>
+              }
 
-              <!-- Grid Display Workspace (Col-span 3) -->
-              <div class="lg:col-span-3 flex flex-col gap-3">
+              <!-- Grid Display Workspace (Col-span 3 or 4) -->
+              <div class="flex flex-col gap-3" [class.lg:col-span-3]="isFilterStory()" [class.lg:col-span-4]="!isFilterStory()">
                 
                 <!-- Live Embedded AG Grid Community -->
-                <div class="border border-[#22252A] rounded-2xl overflow-hidden shadow-2xl bg-[#14161B] p-2">
-                  <div class="bg-[#1E2128] px-3 py-2 border-b border-[#22252A] flex items-center justify-between text-xs text-[#888] rounded-t-xl">
-                    <span class="font-semibold text-[#E0E0E0] flex items-center gap-1.5">
-                      <span class="material-icons text-xs text-emerald-400">table_chart</span> Live AG Grid Community (quartz dark theme)
+                <div 
+                  class="border overflow-hidden p-2 transition-all duration-300"
+                  [class.border-[#22252A]]="selectedTheme() === 'dark'"
+                  [class.rounded-2xl]="selectedTheme() === 'dark'"
+                  [class.bg-[#14161B]]="selectedTheme() === 'dark'"
+                  [class.shadow-2xl]="selectedTheme() === 'dark'"
+                  [style.border-color]="selectedTheme() === 'classic' ? 'var(--app-border-color)' : null"
+                  [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-bg-primary)' : null"
+                  [style.border-radius]="selectedTheme() === 'classic' ? 'var(--app-radius-xl)' : null"
+                >
+                  <div 
+                    class="px-3 py-2 border-b flex items-center justify-between text-xs transition-colors duration-300"
+                    [class.bg-[#1E2128]]="selectedTheme() === 'dark'"
+                    [class.border-[#22252A]]="selectedTheme() === 'dark'"
+                    [class.text-[#888]]="selectedTheme() === 'dark'"
+                    [class.rounded-t-xl]="selectedTheme() === 'dark'"
+                    [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-bg-secondary)' : null"
+                    [style.border-color]="selectedTheme() === 'classic' ? 'var(--app-border-color)' : null"
+                    [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-secondary)' : null"
+                    [style.border-radius]="selectedTheme() === 'classic' ? 'var(--app-radius-lg) var(--app-radius-lg) 0 0' : null"
+                  >
+                    <span 
+                      class="font-semibold flex items-center gap-1.5"
+                      [class.text-[#E0E0E0]]="selectedTheme() === 'dark'"
+                      [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-primary)' : null"
+                    >
+                      <span 
+                        class="material-icons text-xs"
+                        [class.text-emerald-400]="selectedTheme() === 'dark'"
+                        [style.color]="selectedTheme() === 'classic' ? 'var(--app-accent-color)' : null"
+                      >table_chart</span> 
+                      {{ selectedTheme() === 'classic' ? 'Classic Ledger View (Serif & Pink)' : 'Live AG Grid Community (Quartz Dark Theme)' }}
                     </span>
-                    <span class="text-[10px] bg-[#0B0C0E] border border-[#22252A] px-1.5 py-0.5 rounded text-[#888]">
-                      Total Employees: {{ rowData().length }}
+                    <span 
+                      class="text-[10px] border px-1.5 py-0.5 rounded"
+                      [class.bg-[#0B0C0E]]="selectedTheme() === 'dark'"
+                      [class.border-[#22252A]]="selectedTheme() === 'dark'"
+                      [class.text-[#888]]="selectedTheme() === 'dark'"
+                      [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-bg-inset)' : null"
+                      [style.border-color]="selectedTheme() === 'classic' ? 'var(--app-border-color)' : null"
+                      [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-muted)' : null"
+                    >
+                      {{ selectedStory() === 'gutenberg-books' ? 'Loaded Books' : 'Total Employees' }}: {{ rowData().length }}
                     </span>
                   </div>
+
+                  @if (selectedStory() === 'gutenberg-books') {
+                    <!-- Catalog Async Search Input Directly Above Grid -->
+                    <div 
+                      class="px-3.5 py-2.5 border-b flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 transition-colors duration-300"
+                      [class.bg-[#171A1F]]="selectedTheme() === 'dark'"
+                      [class.border-[#22252A]]="selectedTheme() === 'dark'"
+                      [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-bg-secondary)' : null"
+                      [style.border-color]="selectedTheme() === 'classic' ? 'var(--app-border-color)' : null"
+                    >
+                      <div 
+                        class="flex items-center gap-2 text-xs font-semibold"
+                        [class.text-white]="selectedTheme() === 'dark'"
+                        [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-primary)' : null"
+                      >
+                        <span 
+                          class="material-icons text-sm"
+                          [class.text-emerald-400]="selectedTheme() === 'dark'"
+                          [style.color]="selectedTheme() === 'classic' ? 'var(--app-accent-color)' : null"
+                        >auto_stories</span>
+                        <span>Search Catalog:</span>
+                      </div>
+                      <div class="relative flex-1 max-w-sm flex items-center gap-1.5">
+                        <div class="relative flex-1">
+                          <span 
+                            class="material-icons absolute left-2.5 top-1/2 -translate-y-1/2 text-sm"
+                            [class.text-[#888]]="selectedTheme() === 'dark'"
+                            [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-muted)' : null"
+                          >search</span>
+                          <input
+                            #gridSearchInput
+                            type="text"
+                            [value]="booksSearchTerm()"
+                            (keyup.enter)="onBooksSearch(gridSearchInput.value)"
+                            placeholder="Type title/author or e.g. language=es..."
+                            class="w-full pl-8 pr-8 py-1.5 rounded-lg text-xs transition-all focus:outline-none"
+                            [class.bg-[#0B0C0E]]="selectedTheme() === 'dark'"
+                            [class.border]="selectedTheme() === 'dark'"
+                            [class.border-[#22252A]]="selectedTheme() === 'dark'"
+                            [class.text-white]="selectedTheme() === 'dark'"
+                            [class.focus:border-emerald-500]="selectedTheme() === 'dark'"
+                            [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-bg-inset)' : null"
+                            [style.border]="selectedTheme() === 'classic' ? '1px solid var(--app-border-color)' : null"
+                            [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-primary)' : null"
+                            [style.border-radius]="selectedTheme() === 'classic' ? 'var(--app-radius-lg)' : null"
+                          />
+                          @if (gridSearchInput.value) {
+                            <button
+                              type="button"
+                              (click)="gridSearchInput.value = ''; onBooksSearch('')"
+                              class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#888] hover:text-white cursor-pointer"
+                              [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-muted)' : null"
+                            >
+                              <span class="material-icons text-xs">close</span>
+                            </button>
+                          }
+                        </div>
+                        <button
+                          type="button"
+                          (click)="onBooksSearch(gridSearchInput.value)"
+                          class="px-3 py-1.5 font-bold rounded-lg text-xs transition-colors cursor-pointer"
+                          [class.bg-emerald-500]="selectedTheme() === 'dark'"
+                          [class.hover:bg-emerald-400]="selectedTheme() === 'dark'"
+                          [class.text-black]="selectedTheme() === 'dark'"
+                          [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-accent-color)' : null"
+                          [style.color]="selectedTheme() === 'classic' ? 'var(--app-accent-text)' : null"
+                          [style.border-radius]="selectedTheme() === 'classic' ? 'var(--app-radius-lg)' : null"
+                        >
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                  }
                   
                   <!-- The Actual Grid Instance -->
-                  <div class="ag-theme-quartz ag-theme-quartz-dark w-full" style="height: 380px;">
+                  <div 
+                    [class.ag-theme-quartz-dark]="selectedTheme() === 'dark'"
+                    class="ag-theme-quartz w-full transition-all duration-300" 
+                    style="height: 380px;"
+                  >
                     <ag-grid-angular
                       [rowData]="rowData()"
                       [columnDefs]="columnDefs()"
@@ -430,9 +645,23 @@
                       [icons]="gridIcons"
                       [theme]="'legacy'"
                       (gridReady)="onGridReady($event)"
-                      class="ag-theme-quartz ag-theme-quartz-dark h-full w-full"
+                      (cellClicked)="onCellClicked($event)"
+                      [class.ag-theme-quartz-dark]="selectedTheme() === 'dark'"
+                      class="ag-theme-quartz h-full w-full transition-all duration-300"
                     />
                   </div>
+
+                  @if (selectedStory() === 'gutenberg-books') {
+                    <app-pagination
+                      layout="footer"
+                      [totalCount]="booksPaginationInfo().totalCount"
+                      [(currentPage)]="booksCurrentLocalPage"
+                      [(pageSize)]="booksPageSize"
+                      [loading]="booksPaginationInfo().loading"
+                      (pageChanged)="onBooksPageChangeFromComponent($event)"
+                      (pageSizeChanged)="onBooksPageSizeChange($event)"
+                    />
+                  }
                 </div>
 
                 <!-- Live Playground Quick Demonstration Helpers -->
@@ -511,61 +740,76 @@
                 </div>
               </div>
 
-              <!-- Side Component Mockup Control Panel (Col-span 1) -->
-              <div class="flex flex-col gap-4">
-                <div class="bg-[#14161B] border border-[#22252A] p-4 rounded-2xl shadow-2xl flex flex-col gap-3">
-                  <div class="flex items-center gap-1.5 border-b border-[#22252A] pb-2">
-                    <span class="material-icons text-emerald-400 text-sm">settings_input_component</span>
-                    <span class="text-xs font-bold text-[#E0E0E0] uppercase tracking-wider">Storybook Panel</span>
-                  </div>
+              <!-- Right Column Config Panel (Col-span 1) -->
+              @if (columnsPanelPosition() === 'right') {
+                <div class="lg:col-span-1 flex flex-col gap-4">
+                  <app-columns-config
+                    [(visibility)]="columnVisibility"
+                    [columns]="activeColumnsList()"
+                    [(position)]="columnsPanelPosition"
+                    [paginationInfo]="selectedStory() === 'gutenberg-books' ? booksPaginationInfo() : null"
+                    (pageChange)="onBooksPageChange($event)"
+                  />
+                </div>
+              }
 
-                  <!-- Storybook direct rendering of the custom component outside the grid for direct visual test! -->
-                  <div class="flex flex-col gap-1">
-                    <span class="text-[10px] text-[#888] font-semibold tracking-wide uppercase">Direct Visual Preview</span>
-                    <p class="text-[10px] text-[#888] leading-normal mb-2">Interacting with this floating preview communicates directly with the active table filters.</p>
-                    
-                     <div class="border border-[#22252A] rounded-xl p-1 bg-[#0B0C0E] flex justify-center">
-                      @if (selectedStory() === 'multi-select') {
-                        <!-- Embedded MultiSelect Outside Grid connected to Department column filter -->
-                        <app-multi-select-filter
-                          [params]="$any({
-                            api: gridApi,
-                            column: null,
-                            colDef: null,
-                            context: null,
-                            filterChangedCallback: resetAllGridFilters,
-                            getValue: null
-                          })"
-                        />
-                      } @else if (selectedStory() === 'regex') {
-                        <app-regex-filter
-                          [params]="$any({
-                            api: gridApi,
-                            filterChangedCallback: resetAllGridFilters,
-                            getValue: null
-                          })"
-                        />
-                      } @else if (selectedStory() === 'date-range') {
-                        <app-date-range-filter
-                          [params]="$any({
-                            api: gridApi,
-                            filterChangedCallback: resetAllGridFilters,
-                            getValue: null
-                          })"
-                        />
-                      } @else if (selectedStory() === 'smart-ai') {
-                        <app-smart-ai-filter
-                          [params]="$any({
-                            api: gridApi,
-                            filterChangedCallback: resetAllGridFilters,
-                            getValue: null
-                          })"
-                        />
-                      }
+              <!-- Side Component Mockup Control Panel (Col-span 1) -->
+              @if (isFilterStory()) {
+                <div class="lg:col-span-1 flex flex-col gap-4">
+                  <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-1.5 border-b border-[#22252A] pb-2">
+                      <span class="material-icons text-emerald-400 text-sm">settings_input_component</span>
+                      <span class="text-xs font-bold text-[#E0E0E0] uppercase tracking-wider">Storybook Preview</span>
+                    </div>
+
+                    <!-- Storybook direct rendering of the custom component outside the grid for direct visual test! -->
+                    <div class="flex flex-col gap-1">
+                      <span class="text-[10px] text-[#888] font-semibold tracking-wide uppercase">Direct Visual Preview</span>
+                      <p class="text-[10px] text-[#888] leading-normal mb-2">Interacting with this floating preview communicates directly with the active table filters.</p>
+                      
+                       <div class="flex justify-center w-full mt-1.5">
+                        @if (selectedStory() === 'multi-select') {
+                          <!-- Embedded MultiSelect Outside Grid connected to Department column filter -->
+                          <app-multi-select-filter
+                            [params]="$any({
+                              api: gridApi,
+                              column: null,
+                              colDef: null,
+                              context: null,
+                              filterChangedCallback: resetAllGridFilters,
+                              getValue: null
+                            })"
+                          />
+                        } @else if (selectedStory() === 'regex') {
+                          <app-regex-filter
+                            [params]="$any({
+                              api: gridApi,
+                              filterChangedCallback: resetAllGridFilters,
+                              getValue: null
+                            })"
+                          />
+                        } @else if (selectedStory() === 'date-range') {
+                          <app-date-range-filter
+                            [params]="$any({
+                              api: gridApi,
+                              filterChangedCallback: resetAllGridFilters,
+                              getValue: null
+                            })"
+                          />
+                        } @else if (selectedStory() === 'smart-ai') {
+                          <app-smart-ai-filter
+                            [params]="$any({
+                              api: gridApi,
+                              filterChangedCallback: resetAllGridFilters,
+                              getValue: null
+                            })"
+                          />
+                        }
+                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              }
             </div>
           </div>
 
@@ -629,6 +873,52 @@
           </div>
         </section>
       }
+      <!-- Project Footer -->
+      <footer 
+        class="mt-auto border-t pt-6 pb-2 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors duration-300 text-xs"
+        [class.border-[#22252A]]="selectedTheme() === 'dark'"
+        [style.border-color]="selectedTheme() === 'classic' ? 'var(--app-border-color)' : null"
+      >
+        <div class="flex items-center gap-2">
+          <div 
+            class="p-1 rounded flex items-center justify-center font-bold text-xs"
+            [class.bg-emerald-500]="selectedTheme() === 'dark'"
+            [class.text-[#0B0C0E]]="selectedTheme() === 'dark'"
+            [style.background-color]="selectedTheme() === 'classic' ? 'var(--app-accent-color)' : null"
+            [style.color]="selectedTheme() === 'classic' ? 'var(--app-accent-text)' : null"
+          >
+            <span class="material-icons text-sm">grid_on</span>
+          </div>
+          <div>
+            <span 
+              class="font-semibold"
+              [class.text-white]="selectedTheme() === 'dark'"
+              [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-primary)' : null"
+            >GrilleLib Studio</span>
+            <span class="mx-1.5 text-[#555]">•</span>
+            <span 
+              [class.text-[#888]]="selectedTheme() === 'dark'"
+              [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-muted)' : null"
+            >Copyleft GNU AGPL-3.0</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 text-[11px]">
+          <span 
+            [class.text-[#888]]="selectedTheme() === 'dark'"
+            [style.color]="selectedTheme() === 'classic' ? 'var(--app-text-muted)' : null"
+          >
+            Built for enterprise AG Grid Community integrations
+          </span>
+          <span class="text-[#555]">•</span>
+          <span 
+            class="font-mono text-[10px]"
+            [class.text-emerald-400]="selectedTheme() === 'dark'"
+            [style.color]="selectedTheme() === 'classic' ? 'var(--app-accent-color)' : null"
+          >
+            v1.0.0
+          </span>
+        </div>
+      </footer>
     </main>
   </div>
 </div>

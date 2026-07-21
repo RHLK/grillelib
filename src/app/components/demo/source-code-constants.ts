@@ -393,3 +393,501 @@ export class SmartAIFilterComponent implements IFilterAngularComp {
       });
   }
 }`;
+
+export const COLUMNS_CONFIG_SOURCE = `import { Component, ChangeDetectionStrategy, input, model, output } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { Pagination } from '../pagination/pagination';
+
+@Component({
+  selector: 'app-columns-config',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [DecimalPipe, Pagination],
+  templateUrl: './columns-config.html',
+  styleUrl: '../filter/filter-shared.css'
+})
+export class ColumnsConfig {
+  visibility = model.required<Record<string, boolean>>();
+  columns = input<{ key: string; label: string; icon: string }[]>([]);
+  position = model<'left' | 'right'>('left');
+
+  paginationInfo = input<{
+    totalCount: number;
+    currentPage: number;
+    totalPages: number;
+    loading: boolean;
+    hasNext: boolean;
+    hasPrev: boolean;
+    pageSize: number;
+  } | null>(null);
+
+  pageChange = output<'next' | 'prev' | 'first'>();
+
+  onCompactPageChange(newPage: number): void {
+    const info = this.paginationInfo();
+    if (!info) return;
+    if (newPage === 1) {
+      this.pageChange.emit('first');
+    } else if (newPage > info.currentPage) {
+      this.pageChange.emit('next');
+    } else {
+      this.pageChange.emit('prev');
+    }
+  }
+
+  toggleColumn(key: string): void {
+    const prev = this.visibility();
+    const updated = { ...prev, [key]: !prev[key] };
+    const hasVisible = Object.values(updated).some(val => val === true);
+    if (hasVisible) {
+      this.visibility.set(updated);
+    }
+  }
+
+  showAllColumns(): void {
+    const current = { ...this.visibility() };
+    for (const key of Object.keys(current)) {
+      current[key] = true;
+    }
+    this.visibility.set(current);
+  }
+
+  hideAllColumnsExceptName(): void {
+    const current = { ...this.visibility() };
+    for (const key of Object.keys(current)) {
+      current[key] = (key === 'name' || key === 'title');
+    }
+    this.visibility.set(current);
+  }
+}`;
+
+export const PAGINATION_SOURCE = `import { Component, ChangeDetectionStrategy, input, model, output, computed } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+
+@Component({
+  selector: 'app-pagination',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [DecimalPipe],
+  templateUrl: './pagination.html',
+  styleUrl: './pagination.css'
+})
+export class Pagination {
+  totalCount = input.required<number>();
+  currentPage = model.required<number>();
+  pageSize = model.required<number>();
+  loading = input<boolean>(false);
+
+  layout = input<'footer' | 'compact'>('footer');
+  availablePageSizes = input<number[]>([5, 10, 50, 100]);
+
+  totalPages = computed(() => {
+    const total = this.totalCount();
+    const size = this.pageSize();
+    return total > 0 ? Math.ceil(total / size) : 1;
+  });
+
+  hasNext = computed(() => this.currentPage() < this.totalPages());
+  hasPrev = computed(() => this.currentPage() > 1);
+
+  pageChanged = output<number>();
+  pageSizeChanged = output<number>();
+
+  onPageChange(direction: 'next' | 'prev' | 'first'): void {
+    let target = this.currentPage();
+    if (direction === 'first') {
+      target = 1;
+    } else if (direction === 'next' && this.hasNext()) {
+      target += 1;
+    } else if (direction === 'prev' && this.hasPrev()) {
+      target -= 1;
+    }
+
+    if (target !== this.currentPage()) {
+      this.currentPage.set(target);
+      this.pageChanged.emit(target);
+    }
+  }
+
+  onPageSizeChange(newSize: number): void {
+    if (newSize !== this.pageSize()) {
+      this.pageSize.set(newSize);
+      this.currentPage.set(1);
+      this.pageSizeChanged.emit(newSize);
+    }
+  }
+}`;
+
+export const GUTENBERG_BOOKS_SOURCE = `// ========================================================================================
+// REUSABLE COMPONENT SOURCE CODE: PAGINATION COMPONENT (pagination.ts)
+// ========================================================================================
+
+import { Component, ChangeDetectionStrategy, input, model, output, computed } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+
+@Component({
+  selector: 'app-pagination',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [DecimalPipe],
+  templateUrl: './pagination.html'
+})
+export class Pagination {
+  totalCount = input.required<number>();
+  currentPage = model.required<number>();
+  pageSize = model.required<number>();
+  loading = input<boolean>(false);
+  layout = input<'footer' | 'compact'>('footer');
+  availablePageSizes = input<number[]>([5, 10, 50, 100]);
+
+  totalPages = computed(() => {
+    const total = this.totalCount();
+    const size = this.pageSize();
+    return total > 0 ? Math.ceil(total / size) : 1;
+  });
+
+  hasNext = computed(() => this.currentPage() < this.totalPages());
+  hasPrev = computed(() => this.currentPage() > 1);
+
+  pageChanged = output<number>();
+  pageSizeChanged = output<number>();
+
+  onPageChange(direction: 'next' | 'prev' | 'first'): void {
+    let target = this.currentPage();
+    if (direction === 'first') target = 1;
+    else if (direction === 'next' && this.hasNext()) target += 1;
+    else if (direction === 'prev' && this.hasPrev()) target -= 1;
+
+    if (target !== this.currentPage()) {
+      this.currentPage.set(target);
+      this.pageChanged.emit(target);
+    }
+  }
+
+  onPageSizeChange(newSize: number): void {
+    if (newSize !== this.pageSize()) {
+      this.pageSize.set(newSize);
+      this.currentPage.set(1);
+      this.pageSizeChanged.emit(newSize);
+    }
+  }
+}
+
+
+// ========================================================================================
+// REUSABLE COMPONENT SOURCE CODE: COLUMN CONFIG PANEL (columns-config.ts)
+// ========================================================================================
+
+import { Component, ChangeDetectionStrategy, input, model, output } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { Pagination } from '../pagination/pagination';
+
+@Component({
+  selector: 'app-columns-config',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [DecimalPipe, Pagination],
+  templateUrl: './columns-config.html',
+  styleUrl: '../filter/filter-shared.css'
+})
+export class ColumnsConfig {
+  visibility = model.required<Record<string, boolean>>();
+  columns = input<{ key: string; label: string; icon: string }[]>([]);
+  position = model<'left' | 'right'>('left');
+
+  paginationInfo = input<{
+    totalCount: number;
+    currentPage: number;
+    totalPages: number;
+    loading: boolean;
+    hasNext: boolean;
+    hasPrev: boolean;
+    pageSize: number;
+  } | null>(null);
+
+  pageChange = output<'next' | 'prev' | 'first'>();
+
+  onCompactPageChange(newPage: number): void {
+    const info = this.paginationInfo();
+    if (!info) return;
+    if (newPage === 1) {
+      this.pageChange.emit('first');
+    } else if (newPage > info.currentPage) {
+      this.pageChange.emit('next');
+    } else {
+      this.pageChange.emit('prev');
+    }
+  }
+
+  toggleColumn(key: string): void {
+    const prev = this.visibility();
+    const updated = { ...prev, [key]: !prev[key] };
+    const hasVisible = Object.values(updated).some(val => val === true);
+    if (hasVisible) {
+      this.visibility.set(updated);
+    }
+  }
+
+  showAllColumns(): void {
+    const current = { ...this.visibility() };
+    for (const key of Object.keys(current)) {
+      current[key] = true;
+    }
+    this.visibility.set(current);
+  }
+
+  hideAllColumnsExceptName(): void {
+    const current = { ...this.visibility() };
+    for (const key of Object.keys(current)) {
+      current[key] = (key === 'name' || key === 'title');
+    }
+    this.visibility.set(current);
+  }
+}`;
+
+export const GUTENBERG_BOOKS_USAGE_SOURCE = `========================================================================================
+AG GRID COMMUNITY: ASYNC INTEGRATION & REUSABLE COMPONENTS DOCUMENTATION
+========================================================================================
+
+Since AG Grid Community lacks built-in support for column visibility sidebar panels and
+advanced paginated server-side data, this documentation provides a production-grade blueprint
+on how to implement them as decoupled, fully reusable standalone Angular components.
+
+----------------------------------------------------------------------------------------
+1. REUSABLE PAGINATION COMPONENT (<app-pagination>)
+----------------------------------------------------------------------------------------
+A versatile pagination controller supporting dual layouts with smooth reactivity.
+
+Usage Blueprint:
+<app-pagination
+  layout="footer"                  <!-- 'footer' (large) or 'compact' (sidebar) -->
+  [totalCount]="totalCount()"       <!-- Number: total available items across all pages -->
+  [(currentPage)]="currentPage"     <!-- Signal/Model Number: Two-way data binding -->
+  [(pageSize)]="pageSize"           <!-- Signal/Model Number: Two-way data binding -->
+  [loading]="isLoading()"           <!-- Boolean: active backend HTTP fetch state -->
+  (pageChanged)="onPageChange($event)" <!-- Emits page number (starts at 1) -->
+  (pageSizeChanged)="onPageSizeChange($event)" <!-- Emits page size (e.g., 10) -->
+/>
+
+Inputs & Outputs:
+• [totalCount] (required): Total count of records across all pages.
+• [(currentPage)] (required): Current active page (starts at 1). Uses Angular model() for 2-way sync.
+• [(pageSize)] (required): Page size (default 10).
+• [layout]: Design presentation variant:
+   - "footer": Wide table footer layout including exact records number, page selection list, and action buttons.
+   - "compact": Fits neatly into side bars or narrow overlays.
+• (pageChanged): Event fired with the new page index to trigger backend fetches.
+• (pageSizeChanged): Event fired when user switches items per page limit.
+
+----------------------------------------------------------------------------------------
+2. REUSABLE COLUMNS VISIBILITY CONFIG PANEL (<app-columns-config>)
+----------------------------------------------------------------------------------------
+Replicates the native AG Grid Enterprise Column Visibility Menu. Perfectly decoupled and fully reusable.
+
+Usage Blueprint:
+<app-columns-config
+  [(visibility)]="columnVisibility" <!-- Model Map: Record<string, boolean> -->
+  [columns]="columnsMetadata"       <!-- Array: { key, label, icon } metadata -->
+  [(position)]="panelPosition"       <!-- Model: 'left' | 'right' position selector -->
+  [paginationInfo]="paginationObject" <!-- Optional: Integrated compact pagination metadata -->
+  (pageChange)="onPageNavigation($event)" <!-- Optional: Emits 'first' | 'prev' | 'next' -->
+/>
+
+Reactivity Pattern:
+Bind the active AG Grid columns configuration dynamically through Angular signals or computed values.
+
+import { Component, computed, signal } from '@angular/core';
+import { ColDef } from 'ag-grid-community';
+
+export class MyGridComponent {
+  // 1. Maintain column visibility map state
+  columnVisibility = signal<Record<string, boolean>>({
+    id: true,
+    title: true,
+    authors: true,
+    languages: true,
+    download_count: true
+  });
+
+  // 2. Define all available columns
+  columnsMetadata = [
+    { key: 'id', label: 'Book ID', icon: 'tag' },
+    { key: 'title', label: 'Title', icon: 'book' },
+    { key: 'authors', label: 'Authors', icon: 'person' },
+    { key: 'languages', label: 'Languages', icon: 'translate' },
+    { key: 'download_count', label: 'Downloads', icon: 'download' }
+  ];
+
+  // 3. Reactively compute AG Grid colDefs based on visibility signal!
+  colDefs = computed<ColDef[]>(() => {
+    const visibility = this.columnVisibility();
+    return [
+      { field: 'id', headerName: 'ID', width: 90, hide: !visibility['id'] },
+      { field: 'title', headerName: 'Title', flex: 2, hide: !visibility['title'] },
+      { field: 'authors', headerName: 'Authors', width: 200, hide: !visibility['authors'] },
+      { field: 'languages', headerName: 'Languages', width: 120, hide: !visibility['languages'] },
+      { field: 'download_count', headerName: 'Downloads', width: 140, hide: !visibility['download_count'] }
+    ];
+  });
+}
+
+----------------------------------------------------------------------------------------
+3. LIVE GUTENBERG API INTEGRATION BLUEPRINT
+----------------------------------------------------------------------------------------
+The Gutenberg Catalog (https://gutendex.com/books/) operates as an asynchronous, infinite
+data source. Below is the exact implementation showing how to integrate it alongside the reusable
+pagination and columns configuration.
+
+import { Component, inject, signal, computed, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ColDef } from 'ag-grid-community';
+
+@Component({
+  selector: 'app-gutenberg-books-integration',
+  standalone: true,
+  imports: [AgGridAngular, ColumnsConfig, Pagination],
+  template: \`
+    <div class="flex gap-4">
+      <!-- 1. Columns Sidebar with Embedded Compact Pagination -->
+      <app-columns-config
+        [(visibility)]="columnVisibility"
+        [columns]="columnsMetadata"
+        [paginationInfo]="booksPaginationInfo()"
+        (pageChange)="onBooksPageChange($event)"
+      />
+
+      <!-- 2. Grid + Main Footer Pagination -->
+      <div class="flex-1 flex flex-col gap-2">
+        <ag-grid-angular
+          [rowData]="pagedRowData()"
+          [columnDefs]="colDefs()"
+          class="ag-theme-quartz-dark h-[400px] w-full"
+        />
+
+        <app-pagination
+          layout="footer"
+          [totalCount]="totalBooksAvailable()"
+          [(currentPage)]="booksCurrentLocalPage"
+          [(pageSize)]="booksPageSize"
+          [loading]="booksLoading()"
+          (pageChanged)="onLocalPageChange($event)"
+          (pageSizeChanged)="onLocalPageSizeChange($event)"
+        />
+      </div>
+    </div>
+  \`
+})
+export class GutenbergBooksComponent implements OnInit {
+  private http = inject(HttpClient);
+
+  // States
+  allLoadedBooks = signal<any[]>([]);
+  totalBooksAvailable = signal<number>(0);
+  booksLoading = signal<boolean>(false);
+  booksSearchTerm = signal<string>('sherlock');
+  booksPageSize = signal<number>(10);
+  booksCurrentLocalPage = signal<number>(1);
+  booksHasApiMore = signal<boolean>(true);
+  apiNextPageToLoad = 1;
+
+  columnVisibility = signal<Record<string, boolean>>({
+    id: true, title: true, authors: true, languages: true, download_count: true
+  });
+
+  columnsMetadata = [
+    { key: 'id', label: 'Book ID', icon: 'tag' },
+    { key: 'title', label: 'Title', icon: 'book' },
+    { key: 'authors', label: 'Authors', icon: 'person' },
+    { key: 'languages', label: 'Languages', icon: 'translate' },
+    { key: 'download_count', label: 'Downloads', icon: 'download' }
+  ];
+
+  // Reactively compute visible rows for active local page from accumulated cache
+  pagedRowData = computed(() => {
+    const books = this.allLoadedBooks();
+    const start = (this.booksCurrentLocalPage() - 1) * this.booksPageSize();
+    return books.slice(start, start + this.booksPageSize());
+  });
+
+  // Compile active column definitions
+  colDefs = computed<ColDef[]>(() => {
+    const vis = this.columnVisibility();
+    return [
+      { field: 'id', hide: !vis['id'] },
+      { field: 'title', hide: !vis['title'] },
+      { field: 'download_count', hide: !vis['download_count'] }
+    ];
+  });
+
+  // Calculate info object for columns config panel integration
+  booksPaginationInfo = computed(() => {
+    const total = this.totalBooksAvailable();
+    const size = this.booksPageSize();
+    const pages = total > 0 ? Math.ceil(total / size) : 1;
+    const current = this.booksCurrentLocalPage();
+    return {
+      totalCount: total,
+      currentPage: current,
+      totalPages: pages,
+      loading: this.booksLoading(),
+      hasNext: current < pages,
+      hasPrev: current > 1,
+      pageSize: size
+    };
+  });
+
+  ngOnInit() {
+    this.loadBooks(true);
+  }
+
+  loadBooks(reset = false) {
+    if (this.booksLoading()) return;
+    if (reset) {
+      this.allLoadedBooks.set([]);
+      this.booksCurrentLocalPage.set(1);
+      this.apiNextPageToLoad = 1;
+      this.booksHasApiMore.set(true);
+    }
+
+    const search = this.booksSearchTerm().trim();
+    const url = \\\`https://gutendex.com/books/?page=\\\${this.apiNextPageToLoad}&search=\\\${encodeURIComponent(search)}\\\`;
+
+    this.booksLoading.set(true);
+    this.http.get<any>(url).subscribe(res => {
+      this.allLoadedBooks.update(prev => [...prev, ...res.results]);
+      this.totalBooksAvailable.set(res.count || 0);
+      this.booksHasApiMore.set(!!res.next);
+      if (res.next) this.apiNextPageToLoad++;
+      this.booksLoading.set(false);
+    });
+  }
+
+  onLocalPageChange(newPage: number) {
+    const requiredCount = newPage * this.booksPageSize();
+    if (this.allLoadedBooks().length < requiredCount && this.booksHasApiMore()) {
+      this.loadBooks(false);
+    }
+  }
+
+  onLocalPageSizeChange(newSize: number) {
+    this.booksCurrentLocalPage.set(1);
+    const requiredCount = newSize;
+    if (this.allLoadedBooks().length < requiredCount && this.booksHasApiMore()) {
+      this.loadBooks(false);
+    }
+  }
+
+  onBooksPageChange(direction: 'next' | 'prev' | 'first') {
+    let target = this.booksCurrentLocalPage();
+    if (direction === 'first') target = 1;
+    else if (direction === 'next' && this.booksPaginationInfo().hasNext) target++;
+    else if (direction === 'prev' && this.booksPaginationInfo().hasPrev) target--;
+
+    if (target !== this.booksCurrentLocalPage()) {
+      this.booksCurrentLocalPage.set(target);
+      this.onLocalPageChange(target);
+    }
+  }
+}
+`;
+
